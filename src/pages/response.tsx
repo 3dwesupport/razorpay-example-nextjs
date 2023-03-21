@@ -4,8 +4,6 @@ import styles from '@/styles/Home.module.css'
 
 const Response = (params: any) => {
     const router = useRouter();
-    console.log("router::", router);
-    console.log("router.query", router.query)
     const data = router.query;
 
     return (
