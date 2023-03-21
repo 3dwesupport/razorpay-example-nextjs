@@ -1,7 +1,5 @@
-import React ,{useEffect, useState} from "react";
+import React ,{useState} from "react";
 import styles from '@/styles/Home.module.css'
-// import {useEffect, useState} from "react";
-// import "./style.css"
 import {Button, Container, createTheme, TextField, ThemeProvider} from "@mui/material";
 import {useRouter} from "next/router";
 
@@ -10,22 +8,11 @@ import {useRouter} from "next/router";
 const theme = createTheme();
 
 
-export const PaymentGateWay=()=> {
+ const PaymentGateWay=()=> {
     const [orderId, setOrderId] = useState('')
     const [razorpayId, setRazorpayId] = useState('');
     const router = useRouter();
 
-    // useEffect(() => {
-    //     showResponsePage()
-    // }, [response])
-    //
-    // const showResponsePage = () => {
-    //     return (
-    //         <>
-    //
-    //         </>
-    //     )
-    // }
     const showRazorPay = async () => {
         let data;
         const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
@@ -47,7 +34,7 @@ export const PaymentGateWay=()=> {
                     razorpaySignature: response.razorpay_signature,
                 };
                 await router.replace({
-                    pathname: "/response",
+                    pathname: "/paymentGatewayResponse",
                     query: data,
                 });
             }
@@ -55,12 +42,6 @@ export const PaymentGateWay=()=> {
 
         const paymentObject = new window.Razorpay(options);
         paymentObject.open();
-        // console.log("here::: after payment:::",data)
-        // data && await router.replace({
-        //     pathname: "/response",
-        //     query: data,
-        // })
-
     }
     return (
         <div className={styles.main}>
@@ -100,3 +81,4 @@ function loadScript(src) {
         document.body.appendChild(script);
     });
 }
+export default PaymentGateWay

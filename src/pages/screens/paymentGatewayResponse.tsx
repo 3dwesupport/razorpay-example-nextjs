@@ -2,7 +2,7 @@ import React from "react";
 import {useRouter} from "next/router";
 import styles from '@/styles/Home.module.css'
 
-const Response = (params: any) => {
+const PaymentGatewayResponse = (params: any) => {
     const router = useRouter();
     const data = router.query;
 
@@ -24,4 +24,4 @@ const Response = (params: any) => {
     );
 };
 
-export default Response;
+export default PaymentGatewayResponse;
