@@ -9,7 +9,7 @@ const httpRequest = async (req, url, _method, headers, body, auth = null) => {
             url: url,
             data: body,
             headers: headers,
-            auth: auth
+            auth: auth,
         });
     } catch (error) {
         if (error.response) {
@@ -37,7 +37,6 @@ const method = {
 }
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const options = req.body;
-    console.log("options :: ", options);
     const headers = {
         'Content-Type': 'application/json',
     }

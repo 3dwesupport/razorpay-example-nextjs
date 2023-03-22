@@ -1,11 +1,11 @@
 // routes.js
 import React from "react";
 import {Routes, Route} from "react-router-dom";
-import PaymentGatewayResponse from "./pages/screens/paymentGatewayResponse"
+import PaymentGatewayResponse from "./pages/paymentGatewayResponse"
 import Home from "@/pages";
-import CreateApiResponse from "@/pages/screens/createApiResponse";
-import CreateOrder from "@/pages/screens/createOrder";
-import PaymentGateWay from "@/pages/screens/paymentGateWay";
+import CreateApiResponse from "@/pages/createApiResponse";
+import CreateOrder from "@/pages/createOrder";
+import PaymentGateWay from "@/pages/paymentGateWay";
 
 
 const RouterCom = () => (

@@ -2,6 +2,7 @@ import {Inter} from 'next/font/google'
 import {useRouter} from "next/router";
 import {Button} from "@mui/material";
 import styles from "@/styles/Home.module.css";
+import CreateOrder from "@/pages/createOrder";
 
 export default function Home() {
     const router = useRouter();
@@ -16,9 +17,11 @@ export default function Home() {
         });
     }
     return (
-       <div className={styles.home}>
-            <Button onClick={showCreateOrder}>Create Order</Button>
-            <Button onClick={showPaymentGateway}>Complete Payment</Button>
-       </div>
+        <>
+            <div className={styles.home}>
+                <Button onClick={showCreateOrder}>Create Order</Button>
+                <Button onClick={showPaymentGateway}>Complete Payment</Button>
+            </div>
+        </>
     )
 }
