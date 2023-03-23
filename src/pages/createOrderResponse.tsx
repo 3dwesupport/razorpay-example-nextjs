@@ -26,7 +26,7 @@ const CreateOrderResponse = (params: any) => {
                             <div>Amount is : {data?.amount}</div>
                             <div>Currency is : {data?.currency}</div>
                             <div>Receipt is : {data?.receipt}</div>
-                            <div>RazorpayId is : {data?.key}</div>
+                            <div>RazorpayId is : {data?.razorpay_id}</div>
                             <div>orderId is : {data?.id}</div>
                         </div>
                     }

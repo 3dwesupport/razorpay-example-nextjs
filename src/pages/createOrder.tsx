@@ -19,13 +19,12 @@ const CreateOrder = () => {
             amount: parseInt(amount),
             currency: currency,
             receipt: receipt,
-            razorpay_id: razorpayId,
         }
-        await axios.post('/api/CreateApi', data).then(async (res: any) => {
+        await axios.post('/api/createOrder', data).then(async (res: any) => {
             if (res && res.data) {
-                res.data.key = razorpayId;
+                res.data.razorpay_id = razorpayId;
                 await router.push({
-                    pathname: "/createApiResponse",
+                    pathname: "/createOrderResponse",
                     query: res.data,
                 });
             }

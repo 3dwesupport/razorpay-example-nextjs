@@ -24,7 +24,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     },
                 })
                 .then((res) => {
-                    console.log("Fetched orders details sorted by orders IDs -");
                     console.log(res);
                 })
                 .catch((err) => {
