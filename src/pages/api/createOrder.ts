@@ -1,17 +1,11 @@
 // // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import {NextApiRequest, NextApiResponse} from "next";
-import {httpRequest} from "@/pages/api/httpRequest";
+import {httpRequest, method} from "@/pages/api/httpRequest";
 const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient();
 import { nanoid } from 'nanoid'
 
-const method = {
-    POST: "post",
-    GET: "get",
-    PUT: "put",
-    DELETE: "delete",
-    OPTIONS: "options",
-}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     const options = req.body;
@@ -24,14 +18,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         password: "tVOBOvJuHEaF7SfLHRhyLFn6"
     });
     options.order_id = nanoid(10);
-    // options.amount = parseInt(options.amount)
-    await prisma.CreateOrder
+    options.gateway = "razorpay";
+    await prisma.Orders
         .createMany({
             data: [options]
         })
         .then(async (res) => {
             console.log("Created", res.count, "order");
-            await prisma.CreateOrder
+            await prisma.Orders
                 .findMany({
                     orderBy: {
                         order_id: 'desc'

@@ -7,17 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model CreateOrder {
+model Orders {
   order_id    String @unique
+  gateway String
   razorpay_id String
   amount      Int
   currency    String
   receipt     String
-  @@map("CreateOrder")
+  @@map("Orders")
 }
-model PaymentGateway {
+model Payment_Info {
   index_id String @unique
+  gateway String
   order_id    String
   razorpay_id String
-  @@map("PaymentGateway")
+  @@map("Payment_Info")
 }

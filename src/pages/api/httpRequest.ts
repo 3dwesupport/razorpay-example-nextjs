@@ -26,3 +26,10 @@ import axios from "axios";
         return {};
     }
 };
+ export const method = {
+    POST: "post",
+    GET: "get",
+    PUT: "put",
+    DELETE: "delete",
+    OPTIONS: "options",
+}

@@ -4,7 +4,7 @@ import {Button} from "@mui/material";
 import React from "react";
 import {IoMdArrowBack} from "react-icons/io";
 
-const CreateApiResponse = (params: any) => {
+const CreateOrderResponse = (params: any) => {
     const router = useRouter();
     let data = router.query;
     data.journey = "CreateOrder"
@@ -37,4 +37,4 @@ const CreateApiResponse = (params: any) => {
     );
 };
 
-export default CreateApiResponse;
+export default CreateOrderResponse;
