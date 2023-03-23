@@ -1,8 +1,6 @@
-// // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import axios from "axios";
-import {NextApiRequest, NextApiResponse} from "next";
 
-const httpRequest = async (req, url, _method, headers, body, auth = null) => {
+ export const httpRequest = async (req, url, _method, headers, body, auth = null) => {
     try {
         return await axios({
             method: _method,
@@ -28,24 +26,3 @@ const httpRequest = async (req, url, _method, headers, body, auth = null) => {
         return {};
     }
 };
-const method = {
-    POST: "post",
-    GET: "get",
-    PUT: "put",
-    DELETE: "delete",
-    OPTIONS: "options",
-}
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const options = req.body;
-    const headers = {
-        'Content-Type': 'application/json',
-    }
-    let apiUrl = "https://api.razorpay.com/v1" + "/orders";
-    let result = await httpRequest(req, apiUrl, method.POST, headers, options, {
-        username: "rzp_test_XnlOuOZNrannpU",
-        password: "tVOBOvJuHEaF7SfLHRhyLFn6"
-    });
-    console.log(result.data)
-    res.status(200).json(result.data);
-
-}

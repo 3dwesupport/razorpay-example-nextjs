@@ -16,9 +16,10 @@ const CreateOrder = () => {
     let data;
     const handleCreateOrder = async () => {
         data = { //create data for api calling
-            amount: amount,
+            amount: parseInt(amount),
             currency: currency,
             receipt: receipt,
+            razorpay_id: razorpayId,
         }
         await axios.post('/api/CreateApi', data).then(async (res: any) => {
             if (res && res.data) {

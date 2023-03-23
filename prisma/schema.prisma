@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model CreateOrder {
+  order_id    String @unique
+  razorpay_id String
+  amount      Int
+  currency    String
+  receipt     String
+  @@map("CreateOrder")
+}
+model PaymentGateway {
+  index_id String @unique
+  order_id    String
+  razorpay_id String
+  @@map("PaymentGateway")
+}

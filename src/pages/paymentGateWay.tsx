@@ -3,6 +3,7 @@ import styles from '@/styles/Home.module.css'
 import {Button, Container, createTheme, TextField, ThemeProvider} from "@mui/material";
 import {useRouter} from "next/router";
 import {IoMdArrowBack} from "react-icons/io";
+import axios from "axios";
 
 const theme = createTheme();
 
@@ -19,27 +20,28 @@ const PaymentGateWay = (params: any) => {
 
     const showRazorPay = async () => {
         let data;
-        const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
-
+    const res= await loadScript("https://checkout.razorpay.com/v1/checkout.js")
         if (!res) {
             alert("Razorpay SDK failed to load. Are you online?");
             return;
         }
         const options = {
-            key: razorpayId, // Enter the Key ID generated from the Dashboard
-            description: "Test Transaction",
+            razorpay_id: razorpayId, // Enter the Key ID generated from the Dashboard
             order_id: orderId,
             handler: async function (response) {
-                data = {
+               data = {
                     orderCreationId: orderId,
                     razorpayPaymentId: response.razorpay_payment_id,
                     razorpayOrderId: response.razorpay_order_id,
                     razorpaySignature: response.razorpay_signature,
                 };
-                await router.replace({
-                    pathname: "/paymentGatewayResponse",
-                    query: data,
-                });
+                res &&  await axios.post('/api/paymentGatway',options).then(async (res:any)=>{
+                    await router.replace({
+                        pathname: "/paymentGatewayResponse",
+                        query: res.data,
+                    });
+                })
+
             }
         };
 
