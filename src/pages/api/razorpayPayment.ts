@@ -1,8 +1,5 @@
 // // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
-
 import {NextApiRequest, NextApiResponse} from 'next'
-
 const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient();
 import {nanoid} from 'nanoid'
@@ -15,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         .createMany({
             data: [options]
         })
-        .then(async (res) => {
+        .then(async (res: any) => {
             console.log("Created", res.count, "order");
             await prisma.Payment_Info
                 .findMany({
@@ -23,14 +20,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         order_id: 'desc'
                     },
                 })
-                .then((res) => {
+                .then((res: any) => {
                     console.log(res);
                 })
-                .catch((err) => {
+                .catch((err: any) => {
                     console.log("Error in fetching orders: ", err);
                 })
         })
-        .catch((err) => {
+        .catch((err: any) => {
             console.log("Error in creating orders: ", err);
         })
     res.status(200).json(options);

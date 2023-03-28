@@ -30,7 +30,9 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
+    "react-loading-overlay-ts": "^2.0.1",
     "react-router-dom": "^6.9.0",
+    "react-spinners": "^0.13.8",
     "sequelize-yugabytedb": "^1.0.6",
     "tls": "^0.0.1",
     "typescript": "5.0.2"

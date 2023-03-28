@@ -1,7 +1,7 @@
 import axios from "axios";
-
- export const httpRequest = async (req, url, _method, headers, body, auth = null) => {
+export const httpRequest = async (req:any, url:any, _method:any, headers:any, body:any, auth = null) => {
     try {
+        // @ts-ignore
         return await axios({
             method: _method,
             url: url,
@@ -9,9 +9,9 @@ import axios from "axios";
             headers: headers,
             auth: auth,
         });
-    } catch (error) {
+    } catch (error: any) {
+        // @ts-ignore
         if (error.response) {
-            // Request made and server responded
             console.log({"location:": "response data", "data": error.response.data});
             console.log({"location:": "response status", "data": error.response.status});
             console.log({"location:": "response headers", "data": error.response.headers});
@@ -26,7 +26,7 @@ import axios from "axios";
         return {};
     }
 };
- export const method = {
+export const method = {
     POST: "post",
     GET: "get",
     PUT: "put",
