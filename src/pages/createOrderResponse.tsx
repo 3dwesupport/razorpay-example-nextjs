@@ -2,6 +2,9 @@ import styles from '@/styles/Home.module.css'
 import {useRouter} from "next/router";
 import React from "react";
 import {IoMdArrowBack} from "react-icons/io";
+import {fontFamily} from "@mui/system";
+import Image from "next/image";
+import backButton from "../../public/backButton.png";
 
 /***
  * render Response of the create order on screen
@@ -20,29 +23,59 @@ const CreateOrderResponse = (params: any) => {
     }
     return (
         <>
-            <button className={"styles.backButton"} onClick={() => router.back()}><IoMdArrowBack size={30}/></button>
+            <div className={styles.backBtnStyle}>
+                <Image src={backButton} alt={""}
+                       width={40}
+                       height={40}
+                       onClick={() => router.back()}
+                />
+            </div>
+
             <div className={styles.main}>
                 <div className={styles.tab}>
-                    <div className={styles.heading}>Order Successful!!</div>
-                    {JSON.stringify(data, null, 3)}
-                    <div>
-                        {Object.keys(data).length > 0 &&
-                            <div className={styles.headingFont}>
-                                <div>Amount is : {data?.amount}</div>
-                                <div>Currency is : {data?.currency}</div>
-                                <div>Receipt is : {data?.receipt}</div>
-                                <div>RazorpayId is : {data?.razorpay_id}</div>
-                                <div>orderId is : {data?.id}</div>
-                            </div>
-                        }
+                    <div className={styles.heading}>Order Successful!</div>
+                    <div className={styles.horizontalLine}></div>
+                    <div className={styles.responseData}>
+                        {JSON.stringify(data, null, 3)}
                     </div>
-                    <button className={styles.enabled}
-                            onClick={showPaymentGateway}>Complete Payment
-                    </button>
+                    {Object.keys(data).length > 0 &&
+                        <div className={styles.headingFont}>
+                            <div className={styles.responseValues}>
+                                <div className={styles.values}>
+                                    <div>Razorpay Id</div>
+                                    <div>Amount</div>
+                                    <div>Currency</div>
+                                    <div>Receipt</div>
+                                    <div>Order ID</div>
+                                </div>
+                                <div className={styles.values}>
+                                    <div>:</div>
+                                    <div>:</div>
+                                    <div>:</div>
+                                    <div>:</div>
+                                    <div>:</div>
+                                </div>
+                                <div className={styles.values}>
+                                    <div>{data?.razorpay_id}</div>
+                                    <div>{data?.amount}</div>
+                                    <div>{data?.currency}</div>
+                                    <div>{data?.receipt}</div>
+                                    <div>{data?.id}</div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div className={styles.buttonStyle}>
+                        <button className={styles.enabled}
+                                onClick={showPaymentGateway}>Complete Payment
+                        </button>
+                    </div>
                 </div>
             </div>
+
         </>
-    );
+    )
+        ;
 };
 
 export default CreateOrderResponse;

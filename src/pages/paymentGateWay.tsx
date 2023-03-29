@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
 import styles from '@/styles/Home.module.css'
-import {Button, Container, createTheme, TextField, ThemeProvider} from "@mui/material";
+import {Container, createTheme, TextField, ThemeProvider} from "@mui/material";
 import {useRouter} from "next/router";
-import {IoMdArrowBack} from "react-icons/io";
 import axios from "axios";
 import {Loading} from "@/Component/Loading";
+import Image from "next/image";
+import backButton from "../../public/backButton.png";
 
 const theme = createTheme();
 
@@ -59,9 +60,13 @@ const PaymentGateWay = (params: any) => {
     }
     return (
         <div>
-            {!isActive && <button className={styles.backButton} onClick={() => router.back()}><IoMdArrowBack
-                size={30}/>
-            </button>
+            {!isActive && <div className={styles.backBtnStyle}>
+                <Image src={backButton} alt={""}
+                       width={40}
+                       height={40}
+                       onClick={() => router.back()}
+                />
+            </div>
             }
             <div className={styles.main}>
                 <ThemeProvider theme={theme}>
@@ -78,15 +83,19 @@ const PaymentGateWay = (params: any) => {
                                             <div className={styles.textInput}>
                                                 <TextField id="outlined-basic" label="Razorpay Id" variant="outlined"
                                                            value={razorpayId}
+                                                           className={styles.input}
                                                            onChange={e => setRazorpayId(e.target.value)}/>
                                             </div>
                                             <div className={styles.textInput}>
                                                 <TextField id="outlined-basic" label="Order Id" variant="outlined"
                                                            value={orderId}
+                                                           className={styles.input}
                                                            onChange={e => setOrderId(e.target.value)}/>
                                             </div>
-                                            <button className={styles.enabled} onClick={() => showRazorPay()}>Submit
-                                            </button>
+                                            <div className={styles.buttonStyle}>
+                                                <button className={styles.enabled} onClick={() => showRazorPay()}>Submit
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

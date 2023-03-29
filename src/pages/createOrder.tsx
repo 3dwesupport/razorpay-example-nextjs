@@ -4,8 +4,9 @@ import styles from '@/styles/Home.module.css'
 import {Container, createTheme, TextField, ThemeProvider} from "@mui/material";
 import {useRouter} from "next/router";
 import {Loading} from "@/Component/Loading";
-import {IoMdArrowBack} from "react-icons/io";
 const theme = createTheme();
+import backButton from "../../public/backButton.png"
+import Image from "next/image";
 
 /**
  * Render Create Order Screen
@@ -50,10 +51,13 @@ const CreateOrder = () => {
     }
     return (
         <div>
-            {!isActive && <button className={"styles.backButton"}
-                                  onClick={() => router.back()}>
-                <IoMdArrowBack size={30}/>
-            </button>
+            {!isActive && <div className={styles.backBtnStyle}>
+               <Image src={backButton} alt={""}
+                      width={40}
+                      height={40}
+                      onClick={() => router.back()}
+               />
+            </div>
             }
             <div className={styles.main}>
                 <ThemeProvider theme={theme}>
@@ -64,7 +68,7 @@ const CreateOrder = () => {
                                 :
                                 <div className={styles.App}>
                                     <div className={styles.tab}>
-                                        <div className={styles.heading}>CREATE ORDER</div>
+                                        <div className={styles.heading}>Create Order</div>
                                         <div className={styles.horizontalLine}></div>
                                         <div className={styles.form}>
                                             <div className={styles.textInput}>
@@ -104,7 +108,7 @@ const CreateOrder = () => {
                                                            onChange={(e: any) => setReceipt(e.target.value)}
                                                 />
                                             </div>
-                                            <div>
+                                            <div className={styles.buttonStyle}>
                                                 <button disabled={handleDisabled()}
                                                         className={`${handleDisabled() ? styles.btn : styles.enabled}`}
                                                         onClick={handleCreateOrder}>Create Order

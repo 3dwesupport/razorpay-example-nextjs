@@ -34,7 +34,7 @@ export default function Home() {
         <>
             <div className={styles.home}>
                 <div className={styles.tab}>
-                    <div className={styles.heading}>PAYMENT GATEWAY</div>
+                    <div className={styles.heading}>Payment Gateway</div>
                     <div className={styles.horizontalLine}></div>
                     <div className={styles.selectInput}>
                         <SelectInputBox
@@ -57,7 +57,7 @@ export default function Home() {
                             items={availableOptions.map((type: any) => type.options)}
                             onFieldChange={(e: any) => handleOptions(e)}
                         />
-                        <div className={styles.selectInput}>
+                        <div className={styles.btnStyle}>
                             <button disabled={handleDisabled()}
                                     className={`${handleDisabled() ? styles.btn : styles.enabled}`}
                                     onClick={handleSubmit}>Submit
