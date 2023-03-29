@@ -23,14 +23,6 @@ const CreateOrderResponse = (params: any) => {
     }
     return (
         <>
-            <div className={styles.backBtnStyle}>
-                <Image src={backButton} alt={""}
-                       width={40}
-                       height={40}
-                       onClick={() => router.back()}
-                />
-            </div>
-
             <div className={styles.main}>
                 <div className={styles.tab}>
                     <div className={styles.heading}>Order Successful!</div>

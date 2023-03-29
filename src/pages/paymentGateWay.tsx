@@ -34,7 +34,6 @@ const PaymentGateWay = (params: any) => {
             alert("Razorpay SDK failed to load. Are you online?");
             return;
         }
-        setActive(true)
         const options = {
             razorpay_id: razorpayId, // Enter the Key ID generated from the Dashboard
             order_id: orderId,
@@ -54,20 +53,13 @@ const PaymentGateWay = (params: any) => {
 
             }
         };
+        setActive(true)
 
         const paymentObject = new window.Razorpay(options);
         paymentObject.open();
     }
     return (
         <div>
-            {!isActive && <div className={styles.backBtnStyle}>
-                <Image src={backButton} alt={""}
-                       width={40}
-                       height={40}
-                       onClick={() => router.back()}
-                />
-            </div>
-            }
             <div className={styles.main}>
                 <ThemeProvider theme={theme}>
                     <Container>

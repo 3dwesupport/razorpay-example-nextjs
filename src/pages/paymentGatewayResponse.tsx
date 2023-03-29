@@ -9,15 +9,14 @@ const PaymentGatewayResponse = (params: any) => {
     const router = useRouter();
     const data = router.query;
 
+    const handleGoHome = async () => {
+        await router.replace({
+            pathname: "/paymentGateWay",
+        });
+    }
+
     return (
         <>
-            <div className={styles.backBtnStyle}>
-                <Image src={backButton} alt={""}
-                       width={40}
-                       height={40}
-                       onClick={() => router.back()}
-                />
-            </div>
             <div className={styles.main}>
                 <div className={styles.tab}>
                     <div className={styles.heading}>Payment Successful!!</div>
@@ -50,6 +49,12 @@ const PaymentGatewayResponse = (params: any) => {
                             </div>
                         </div>
                     }
+                    <div className={styles.buttonStyle}>
+                        <button
+                            className={styles.enabled}
+                            onClick={handleGoHome}>Home
+                        </button>
+                    </div>
                 </div>
             </div>
         </>
