@@ -1,6 +1,4 @@
 import paytmConfig from "./config";
-import {cookies} from "next/headers";
-
 const https = require('https');
 const PaytmChecksum = require('paytmchecksum');
 
@@ -13,7 +11,7 @@ export default async function handler(req, res) {
             "mid": paytmConfig.mid,
             "websiteName": "WEBSTAGING",
             "orderId": req.body.orderId,
-            "callbackUrl": "http://localhost:3000",
+            "callbackUrl": "http://localhost:3000/paytmTransaction",
             "txnAmount": {
                 "value": req.body.amount,
                 "currency": "INR",
@@ -68,7 +66,6 @@ export default async function handler(req, res) {
         }
         let result = await requestAsync()
         console.log("result is ::::::::::::", result)
-
         res.status(200).json(result);
     }
 }

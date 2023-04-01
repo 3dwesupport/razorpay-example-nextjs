@@ -66,5 +66,31 @@ export default function postTransaction(req, res) {
         post_req.write(post_data);
         post_req.end();
     });
+    await prisma.orders
+        .createMany({
+            data: [options]
+        })
+        .then(async (res: any) => {
+            console.log("Created", res.count, "order");
+            await prisma.Orders
+                .findMany({
+                    orderBy: {
+                        order_id: 'desc'
+                    },
+                })
+                .then((res: any) => {
+                    console.log("Fetched orders details sorted by orders IDs -");
+                    console.log(res);
+                    isProcessed = true;
+                })
+                .catch((err: any) => {
+                    console.log("Error in fetching orders: ", err);
+                    isError = err
+                })
+        })
+        .catch((err: any) => {
+            console.log("Error in creating orders: ", err);
+            isError = err
+        })
     res.status(200).json({body: req.body})
 }
