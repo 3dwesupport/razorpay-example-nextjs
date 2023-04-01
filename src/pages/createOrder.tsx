@@ -5,8 +5,6 @@ import {Container, createTheme, TextField, ThemeProvider} from "@mui/material";
 import {useRouter} from "next/router";
 import {Loading} from "@/Component/Loading";
 const theme = createTheme();
-import backButton from "../../public/backButton.png"
-import Image from "next/image";
 
 /**
  * Render Create Order Screen
