@@ -8,6 +8,7 @@ import OrderResponseFailed from "@/pages/OrderResponseFailed";
 import PaymentGateWay from "@/pages/paymentGateWay";
 import PaymentGatewayResponse from "@/pages/paymentGatewayResponse";
 import PaytmPayment from "@/pages/paytmPayment ";
+import PaymentLink from "@/pages/paymentLink";
 
 
 const RouterCom = () => (
@@ -19,6 +20,7 @@ const RouterCom = () => (
         <Route exact path="/createOrder" element={CreateOrder}/>
         <Route exact path="/OrderResponseFailed" element={OrderResponseFailed}/>
         <Route exact path="/paytmPayment" element={PaytmPayment}/>
+        <Route exact path="/paymentLink" element={PaymentLink}/>
     </Routes>
 );
 

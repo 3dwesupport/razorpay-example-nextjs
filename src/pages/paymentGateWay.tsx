@@ -97,7 +97,7 @@ const PaymentGateWay = (params: any) => {
 }
 
 
-function loadScript(src: any) {
+export function loadScript(src: any) {
     return new Promise((resolve) => {
         const script = document.createElement("script");
         script.src = src;
