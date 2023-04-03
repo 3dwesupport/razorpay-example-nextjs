@@ -3,14 +3,12 @@ import styles from "@/styles/Home.module.css";
 import paytmConfig from "././api/config";
 import {TextField} from "@mui/material";
 
-
 const PaytmPayment = () => {
     const [amount, setAmount] = useState("")
-    // const [mid, setMid] = useState(undefined);
     const showPaytm = async () => {
         const value = await loadScript(`${paytmConfig.PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${paytmConfig.mid}.js`)
         if (!value) {
-            alert("Razorpay SDK failed to load. Are you online?");
+            alert("Paytm SDK failed to load. Are you online?");
             return;
         }
         let amount = 1;
@@ -45,7 +43,7 @@ const PaytmPayment = () => {
         };
         if (window.Paytm && window.Paytm.CheckoutJS) {
             window.Paytm.CheckoutJS.onLoad(function excecuteAfterCompleteLoad() {
-                // initialze configuration using init method
+                // initialize configuration using init method
                 window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
                     // after successfully updating configuration, invoke JS Checkout
                     window.Paytm.CheckoutJS.invoke();
@@ -81,7 +79,7 @@ const PaytmPayment = () => {
 }
 
 function loadScript(src) {
-    return new Promise((resolve) => {
+    return new Promise((resolve:any) => {
         const script = document.createElement("script");
         script.src = src;
         script.onload = () => {

@@ -1,13 +1,25 @@
 import paytmConfig from "./config";
-
 const https = require('https');
-
 const PaytmChecksum = require('paytmchecksum');
-export default function postTransaction(req, res) {
+const {PrismaClient} = require('@prisma/client')
+const prisma = new PrismaClient();
+import { nanoid } from 'nanoid'
+export default async function postTransaction(req:any, res:any) {
+
+    req.body.index_id=nanoid(10);
+    req.body.gateway="paytm";
+
+
+        const options ={
+            index_id: nanoid(10),
+            gateway: req.body.gateway,
+            orderId: req.body.ORDERID,
+            Status:req.body.STATUS,
+            amount:req.body.TXNAMOUNT,
+        }
 
     /* initialize an object */
     var paytmParams = {};
-
     /* body parameters */
     paytmParams.body = {
 
@@ -17,7 +29,6 @@ export default function postTransaction(req, res) {
         /* Enter your order id which needs to be check status for */
         "orderId" : req.body.ORDERID,
     };
-
     /**
      * Generate checksum by parameters we have in body
      * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys
@@ -52,8 +63,8 @@ export default function postTransaction(req, res) {
 
         // Set up the request
         var response = "";
-        var post_req = https.request(options, function(post_res) {
-            post_res.on('data', function (chunk) {
+        var post_req = https.request(options, function(post_res:any) {
+            post_res.on('data', function (chunk:any) {
                 response += chunk;
             });
 
@@ -66,13 +77,13 @@ export default function postTransaction(req, res) {
         post_req.write(post_data);
         post_req.end();
     });
-    await prisma.orders
+    await prisma.PaytmPayment_Info
         .createMany({
             data: [options]
         })
         .then(async (res: any) => {
             console.log("Created", res.count, "order");
-            await prisma.Orders
+            await prisma.PaytmPayment_Info
                 .findMany({
                     orderBy: {
                         order_id: 'desc'
@@ -81,16 +92,13 @@ export default function postTransaction(req, res) {
                 .then((res: any) => {
                     console.log("Fetched orders details sorted by orders IDs -");
                     console.log(res);
-                    isProcessed = true;
                 })
                 .catch((err: any) => {
                     console.log("Error in fetching orders: ", err);
-                    isError = err
                 })
         })
         .catch((err: any) => {
             console.log("Error in creating orders: ", err);
-            isError = err
         })
     res.status(200).json({body: req.body})
 }

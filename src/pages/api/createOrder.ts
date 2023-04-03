@@ -3,9 +3,7 @@ import {NextApiRequest, NextApiResponse} from "next";
 import {httpRequest, method} from "@/pages/api/httpRequest";
 const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient();
-import {nanoid} from 'nanoid'
-import {Simulate} from "react-dom/test-utils";
-
+import { nanoid } from 'nanoid'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const options = req.body;

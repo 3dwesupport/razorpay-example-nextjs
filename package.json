@@ -27,7 +27,6 @@
     "next": "13.2.4",
     "paytm-pg-node-sdk": "^1.0.4",
     "paytmchecksum": "^1.5.0",
-    "prisma": "^4.11.0",
     "razorpay": "^2.8.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -38,5 +37,8 @@
     "sequelize-yugabytedb": "^1.0.6",
     "tls": "^0.0.1",
     "typescript": "5.0.2"
+  },
+  "devDependencies": {
+    "prisma": "^4.12.0"
   }
 }

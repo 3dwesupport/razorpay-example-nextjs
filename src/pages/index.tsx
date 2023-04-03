@@ -3,16 +3,14 @@ import styles from "@/styles/Home.module.css";
 import React, {useState} from "react";
 import {SelectInputBox} from "@/Component/selectInputBox";
 import {availableGateway, availableOptions} from "@/constants";
-import Document from "./_document";
 import PaytmPayment from "@/pages/paytmPayment ";
-
 
 export default function Home() {
     // const [selectedGateway, setSelectedGateway] = useState<any>(undefined);
     // const [selectedOptions, setSelectedOptions] = useState<any>(undefined);
     // const router = useRouter();
-
-    //handle gateway dropdown
+    //
+    // // handle gateway dropdown
     // const handleGateway = (e: any) => {
     //     let selectedItem: any = availableGateway.find((item: any) => item.gateway === e.target.value);//find the object having gateway value of customers selected gateway
     //     setSelectedGateway(selectedItem.gateway);//assign value to the variable for the selected metal
@@ -71,11 +69,11 @@ export default function Home() {
     //         </div>
     //     </>
     // )
-    return(
+    return (
         // <PaymentForm/>
-   <PaytmPayment/>
-        // <Document/>
-        )
+        <PaytmPayment/>
+        // x<Document/>
+    )
 
 }
 

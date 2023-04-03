@@ -11,7 +11,7 @@ export default async function handler(req, res) {
             "mid": paytmConfig.mid,
             "websiteName": "WEBSTAGING",
             "orderId": req.body.orderId,
-            "callbackUrl": "http://localhost:3000/paytmTransaction",
+            "callbackUrl": "http://localhost:3000/api/postTransaction",
             "txnAmount": {
                 "value": req.body.amount,
                 "currency": "INR",
@@ -45,8 +45,8 @@ export default async function handler(req, res) {
                 };
 
                 let response = "";
-                let post_req = https.request(options, function (post_res) {
-                    post_res.on('data', function (chunk) {
+                let post_req = https.request(options, function (post_res:any) {
+                    post_res.on('data', function (chunk:any) {
                         response += chunk;
                     });
 
@@ -64,8 +64,9 @@ export default async function handler(req, res) {
 
             })
         }
+        console.log("value is :::::::::::::::::::::",req.body)
         let result = await requestAsync()
-        console.log("result is ::::::::::::", result)
+        console.log("result is ::::::::::::", result);
         res.status(200).json(result);
     }
 }

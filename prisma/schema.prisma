@@ -23,3 +23,11 @@ model Payment_Info {
   razorpay_id String
   @@map("Payment_Info")
 }
+model PaytmPayment_Info{
+  index_id String @unique
+  gateway String
+  orderId   String
+  Status String
+  amount    String
+  @@map("PaytmPayment_Info")
+}

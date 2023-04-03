@@ -1,14 +1,13 @@
 import React from "react"
-import axios from "axios/index";
+import axios from "axios";
 
-const PaytmTransactionSuccess=async ()=>{
-    await axios.post('/api/postTransaction', data).then(async (res: any) => {
-        if (res && res.data) {
-            console.log("console .log::::::::::::::::::::::::::",res)
-        }
+const PaytmTransactionSuccess=()=>{
+     axios.post('/api/postTransaction').then( (res: any) => {
+
     })
     return(
         <>
+           <div>value is :::::::</div>
 
         </>
     )

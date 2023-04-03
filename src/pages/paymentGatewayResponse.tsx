@@ -1,9 +1,6 @@
 import React from "react";
 import {useRouter} from "next/router";
 import styles from '@/styles/Home.module.css'
-import {IoMdArrowBack} from "react-icons/io";
-import Image from "next/image";
-import backButton from "../../public/backButton.png";
 
 const PaymentGatewayResponse = (params: any) => {
     const router = useRouter();
