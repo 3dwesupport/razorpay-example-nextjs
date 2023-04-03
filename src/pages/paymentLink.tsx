@@ -1,9 +1,11 @@
 import styles from "@/styles/Home.module.css";
 import {TextField} from "@mui/material";
 import React, {useState} from "react";
+import {useRouter} from "next/router";
 
 const PaymentLink = () => {
     const [userData, setUserData] = useState({})
+    const router = useRouter();
 
     const createPaytmLink = async () => {
         let res = await fetch("/api/createLinkApi", {
@@ -17,6 +19,11 @@ const PaymentLink = () => {
             console.log("response for Payment link is created successfully ::: ", res)
             await res.json().then((res) => {
                 console.log("response inside ::: ", res)
+                router.push({
+                    pathname: "/paytmLink",
+                    query: res,
+                });
+
             })
         }
     }
@@ -24,6 +31,8 @@ const PaymentLink = () => {
         <div className={styles.main}>
             <div className={styles.App}>
                 <div className={styles.tab}>
+                    <div className={styles.heading}>Create Paytm Links</div>
+                    <div className={styles.horizontalLine}></div>
                     <div className={styles.form}>
                         <div className={styles.textInput}>
                             <TextField id="outlined-basic" label="Amount" variant="outlined"

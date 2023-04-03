@@ -1,6 +1,8 @@
+import {afterWrite} from "@popperjs/core";
+
 const https = require('https');
 const PaytmChecksum = require('paytmchecksum');
-export default async function handler(req, res) {
+export default async function handler(req: any, res: any) {
     if (req.method === 'POST') {
         let paytmParams = {};
 
@@ -9,55 +11,59 @@ export default async function handler(req, res) {
             "linkType": "FIXED",
             "linkDescription": "Test Payment",
             "linkName": "Test",
-            "amount": req.body.amount
+            "amount": req.body.amount,
         };
 
         /*
         * Generate checksum by parameters we have in body
         * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys
         */
-        PaytmChecksum.generateSignature(JSON.stringify(paytmParams.body), "SnuVjF30cYhMEv2D").then(async function (checksum) {
+        const checksum = await PaytmChecksum.generateSignature(JSON.stringify(paytmParams.body), "SnuVjF30cYhMEv2D")
 
-            paytmParams.head = {
-                "tokenType": "AES",
-                "signature": checksum
-            };
+        paytmParams.head = {
+            "tokenType": "AES",
+            "signature": checksum
+        };
 
-            let post_data = JSON.stringify(paytmParams);
+        let post_data = JSON.stringify(paytmParams);
+        const requestAsync = async () => {
+            return new Promise((resolve, reject) => {
 
-            let options = {
-                /* for Production */
-                hostname: 'securegw.paytm.in',
+                let options = {
+                    /* for Production */
+                    hostname: 'securegw.paytm.in',
 
-                port: 443,
-                path: '/link/create',
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Content-Length': post_data.length
-                }
-            };
+                    port: 443,
+                    path: '/link/create',
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Content-Length': post_data.length
+                    }
+                };
 
-            let response = "";
-            // let data
-            let post_req = await https.request(options, async function (post_res) {
-                post_res.on('data', function (chunk) {
-                    response += chunk;
+                let response = "";
+                // let data
+                let post_req = https.request(options, async function (post_res: any) {
+                    post_res.on('data', function (chunk: any) {
+                        response += chunk;
+                    });
+
+                    return post_res.on('end', async function () {
+                        // data += response
+                        resolve(JSON.parse(response).body)
+                    });
                 });
 
-                return post_res.on('end', async  function () {
-                    console.log("response for api ::: ===== :::::: ", response)
-                    // data += response
-                    return response
-                });
+
+                console.log("post_req ::: === ", post_req)
+                post_req.write(post_data);
+                post_req.end();
             });
 
-            console.log("post_req ::: === ", post_req)
-            post_req.write(post_data);
-            post_req.end();
-            res.status(200).json(post_data);
-            return post_req
-        });
+        }
+        let result = await requestAsync()
+        res.status(200).json(result);
     }
 }
 

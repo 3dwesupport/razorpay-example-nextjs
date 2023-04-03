@@ -31,6 +31,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             console.log("Error in creating orders: ", err);
         })
     res.status(200).json(options);
-
 }
 

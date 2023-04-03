@@ -2,7 +2,7 @@ import paytmConfig from "./config";
 const https = require('https');
 const PaytmChecksum = require('paytmchecksum');
 
-export default async function handler(req, res) {
+export default async function handler(req:any, res:any) {
     if (req.method === 'POST') {
         let paytmParams = {}
 
@@ -64,9 +64,7 @@ export default async function handler(req, res) {
 
             })
         }
-        console.log("value is :::::::::::::::::::::",req.body)
         let result = await requestAsync()
-        console.log("result is ::::::::::::", result);
         res.status(200).json(result);
     }
 }
