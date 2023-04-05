@@ -6,7 +6,6 @@ import Link from "next/link";
 const PaytmLink = () => {
     const router = useRouter();
     let data = router.query;
-    console.log("response is ::::::::::::::::::::", data)
     return (
         <div className={styles.main}>
             <div className={styles.container}>

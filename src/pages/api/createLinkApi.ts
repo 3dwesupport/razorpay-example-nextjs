@@ -1,5 +1,3 @@
-import {afterWrite} from "@popperjs/core";
-
 const https = require('https');
 const PaytmChecksum = require('paytmchecksum');
 export default async function handler(req: any, res: any) {
@@ -12,6 +10,7 @@ export default async function handler(req: any, res: any) {
             "linkDescription": "Test Payment",
             "linkName": "Test",
             "amount": req.body.amount,
+            "statusCallbackUrl": "http://localhost:3000/api/checkPaymentStatus"
         };
 
         /*
@@ -54,9 +53,6 @@ export default async function handler(req: any, res: any) {
                         resolve(JSON.parse(response).body)
                     });
                 });
-
-
-                console.log("post_req ::: === ", post_req)
                 post_req.write(post_data);
                 post_req.end();
             });

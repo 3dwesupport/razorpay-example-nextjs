@@ -8,23 +8,38 @@ const PaymentLink = () => {
     const router = useRouter();
 
     const createPaytmLink = async () => {
-        let res = await fetch("/api/createLinkApi", {
+        let res = await (await fetch("/api/createLinkApi", {
             method: "POST", // or 'PUT'
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(userData),
-        })
-        if (res) {
-            console.log("response for Payment link is created successfully ::: ", res)
-            await res.json().then((res) => {
-                console.log("response inside ::: ", res)
-                router.push({
+        }))
+        const currentResponse = await res.json()
+        if (currentResponse) {
+            console.log("response ::: ",currentResponse)
+
+            const data = {
+                linkId: currentResponse.linkId
+            }
+            console.log("data is :::::::::::::::::;", data)
+            // let response = await fetch("/api/checkPaymentStatus", {
+            //     method: "POST", // or 'PUT'
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify(data),
+            // })
+            console.log("response for Payment link is created successfully ::: ", currentResponse, "payment Status ")
+            console.log("value of the second response is ::::::::::::::::::")
+            // await currentResponse.then((res:any) => {
+                console.log("response inside ::: ", currentResponse)
+                await router.push({
                     pathname: "/paytmLink",
-                    query: res,
+                    query: currentResponse,
                 });
 
-            })
+            // })
         }
     }
     return (

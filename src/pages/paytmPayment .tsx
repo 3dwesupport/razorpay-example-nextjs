@@ -34,7 +34,7 @@ const PaytmPayment = () => {
                 "amount": amount /* update amount */
             },
             "handler": {
-                "notifyMerchant": function (eventName, data) {
+                "notifyMerchant": function (eventName:any, data:any) {
                     console.log("notifyMerchant handler function called");
                     console.log("eventName => ", eventName);
                     console.log("data => ", data);
@@ -47,7 +47,7 @@ const PaytmPayment = () => {
                 window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
                     // after successfully updating configuration, invoke JS Checkout
                     window.Paytm.CheckoutJS.invoke();
-                }).catch(function onError(error) {
+                }).catch(function onError(error:any) {
                     console.log("error => ", error);
                 });
             });
@@ -78,7 +78,7 @@ const PaytmPayment = () => {
     )
 }
 
-function loadScript(src) {
+function loadScript(src:any) {
     return new Promise((resolve:any) => {
         const script = document.createElement("script");
         script.src = src;
