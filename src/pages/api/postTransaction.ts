@@ -3,20 +3,19 @@ const https = require('https');
 const PaytmChecksum = require('paytmchecksum');
 const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient();
-import { nanoid } from 'nanoid'
-export default async function postTransaction(req:any, res:any) {
+import {nanoid} from 'nanoid'
 
-    req.body.index_id=nanoid(10);
-    req.body.gateway="paytm";
+export default async function postTransaction(req: any, res: any) {
 
-
-        const options ={
-            index_id: nanoid(10),
-            gateway: req.body.gateway,
-            orderId: req.body.ORDERID,
-            Status:req.body.STATUS,
-            amount:req.body.TXNAMOUNT,
-        }
+    req.body.index_id = nanoid(10);
+    req.body.gateway = "paytm";
+    const options = {
+        index_id: nanoid(10),
+        gateway: req.body.gateway,
+        orderId: req.body.ORDERID,
+        Status: req.body.STATUS,
+        amount: req.body.TXNAMOUNT,
+    }
 
     /* initialize an object */
     var paytmParams = {};
@@ -24,21 +23,21 @@ export default async function postTransaction(req:any, res:any) {
     paytmParams.body = {
 
         /* Find your MID in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys */
-        "mid" : req.body.MID,
+        "mid": req.body.MID,
 
         /* Enter your order id which needs to be check status for */
-        "orderId" : req.body.ORDERID,
+        "orderId": req.body.ORDERID,
     };
     /**
      * Generate checksum by parameters we have in body
      * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys
      */
-    PaytmChecksum.generateSignature(JSON.stringify(paytmParams.body), paytmConfig.key).then(function(checksum){
+    PaytmChecksum.generateSignature(JSON.stringify(paytmParams.body), paytmConfig.key).then(function (checksum:any) {
         /* head parameters */
         paytmParams.head = {
 
             /* put generated checksum value here */
-            "signature"	: checksum
+            "signature": checksum
         };
 
         /* prepare JSON string for request */
@@ -51,7 +50,6 @@ export default async function postTransaction(req:any, res:any) {
 
             /* for Production */
             hostname: 'securegw.paytm.in',
-
             port: 443,
             path: '/v3/order/status',
             method: 'POST',
@@ -63,12 +61,12 @@ export default async function postTransaction(req:any, res:any) {
 
         // Set up the request
         var response = "";
-        var post_req = https.request(options, function(post_res:any) {
-            post_res.on('data', function (chunk:any) {
+        var post_req = https.request(options, function (post_res: any) {
+            post_res.on('data', function (chunk: any) {
                 response += chunk;
             });
 
-            post_res.on('end', function(){
+            post_res.on('end', function () {
                 console.log('Response: ', response);
             });
         });

@@ -31,3 +31,11 @@ model PaytmPayment_Info{
   amount    String
   @@map("PaytmPayment_Info")
 }
+
+model Razorpay_Link{
+  id String @unique
+  gateway String
+  paymentId  String
+  paymentStatus   String
+  @@map("Razorpay_Link")
+}

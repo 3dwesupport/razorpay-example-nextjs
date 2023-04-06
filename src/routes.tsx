@@ -11,6 +11,7 @@ import PaytmPayment from "@/pages/paytmPayment ";
 import PaymentLink from "@/pages/paymentLink";
 import PaytmTransactionSuccess from "@/pages/paytmTransaction";
 import PaytmLink from "@/pages/paytmLink";
+import razorpayResponseLink from "@/pages/razorpayResponseLink";
 
 
 const RouterCom = () => (
@@ -25,6 +26,7 @@ const RouterCom = () => (
         <Route exact path="/paymentLink" element={PaymentLink}/>
         <Route exact path="/paytmTransaction" element={PaytmTransactionSuccess}/>
         <Route exact path="/paytmLink" element={PaytmLink}/>
+        <Route exact path="/razorpayResponseLink" element={razorpayResponseLink}/>
     </Routes>
 );
 
