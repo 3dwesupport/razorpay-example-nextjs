@@ -9,9 +9,36 @@ export const availableGateway = [
 
 export const availableOptions = [
     {
-        options: "CreateOrder"
+        options: 'CreateOrder'
     },
     {
-        options: "CompletePayment"
+        options: 'CompletePayment'
+    },
+    {
+        options: 'PaymentLink'
     },
 ]
+export const paytmOption = [
+    {
+        options: "PaytmOrder"
+    },
+    {
+        options: "PaymentLink"
+    },
+]
+
+export const currencyOptions = [
+    {
+        currency: "INR",
+    },
+    {
+        currency: "USD"
+    },
+    {
+        currency: "EUR"
+    },
+    {
+        currency: "SGD"
+    },
+]
+

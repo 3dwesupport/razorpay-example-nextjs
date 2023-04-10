@@ -227,6 +227,11 @@
     align-content: center;
     margin-block: 20px;
 }
+.textInputValue {
+    width: 90%;
+    align-content: center;
+    margin-block: 20px;
+}
 
 .selectInput {
     align-content: center;
@@ -313,6 +318,10 @@
 
 .textFieldStyle {
     margin: 0 0 16px 0 !important;
+    text-transform: capitalize;
+    text-align: left;
+}
+.textFieldValue {
     text-transform: capitalize;
     text-align: left;
 }
