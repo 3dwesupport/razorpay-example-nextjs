@@ -49,7 +49,7 @@ const CreateOrderResponse = (params: any) => {
                                 </div>
                                 <div className={styles.values}>
                                     <div>{data?.razorpay_id}</div>
-                                    <div>{data?.amount}</div>
+                                    <div>{data?.amount/100}</div>
                                     <div>{data?.currency}</div>
                                     <div>{data?.receipt}</div>
                                     <div>{data?.id}</div>

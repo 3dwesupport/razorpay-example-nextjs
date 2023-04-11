@@ -1,6 +1,7 @@
 import React from "react";
 import {useRouter} from "next/router";
 import styles from "@/styles/Home.module.css";
+
 const RazorpayLink = () => {
     const router = useRouter();
     let data = router.query;
@@ -20,7 +21,7 @@ const RazorpayLink = () => {
 
                             </div>
                             <div className={styles.values}>
-                                <div>{data?.short_url}</div>
+                                <div onClick={() => window.open(data?.short_url)}>{data?.short_url}</div>
                             </div>
                         </div>
                     </div>

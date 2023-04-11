@@ -14,17 +14,24 @@ const theme = createTheme();
 const PaymentGateWay = (params: any) => {
     const [orderId, setOrderId] = useState<any>(undefined);
     const [isActive, setActive] = useState(false)
-    const [razorpayId, setRazorpayId] = useState<any>(undefined);
+    const [razorpayId, setRazorpayId] = useState<any>("");
     const router = useRouter();
     const data = router.query;
+    const [error,setError]=useState<any>(false)
 
     useEffect(() => {
         setOrderId(data.journey && data.id);
         setRazorpayId(data.journey && data.razorpay_id);
     }, [])
 
+    //handle onClick Disabled
+    const handleDisabled = () => {
+        return !(razorpayId?.length>=18 && orderId?.length>=10 );
+    }
+
     //handle onclick event on submit button
     const showRazorPay = async () => {
+        setError(true)
         let data: any;
         const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js")
         if (!res) {
@@ -51,10 +58,10 @@ const PaymentGateWay = (params: any) => {
             }
         };
         setActive(true)
-
         const paymentObject = new window.Razorpay(options);
         paymentObject.open();
     }
+
     return (
         <div>
             <div className={styles.main}>
@@ -75,14 +82,24 @@ const PaymentGateWay = (params: any) => {
                                                            className={styles.input}
                                                            onChange={e => setRazorpayId(e.target.value)}/>
                                             </div>
+                                            {!error && (razorpayId?.length <= 18 && razorpayId?.length != 0) ?
+                                                <label className={styles.error}>Enter a valid RazorpayId
+                                                </label> : ""
+                                            }
                                             <div className={styles.textInput}>
                                                 <TextField id="outlined-basic" label="Order Id" variant="outlined"
                                                            value={orderId}
                                                            className={styles.input}
                                                            onChange={e => setOrderId(e.target.value)}/>
-                                            </div>
+
+                                            </div>{!error && (orderId?.length <10 && orderId?.length != 0) ?
+                                            <label className={styles.error}>Enter a valid OrderId
+                                            </label> : ""
+                                        }
                                             <div className={styles.buttonStyle}>
-                                                <button className={styles.enabled} onClick={() => showRazorPay()}>Submit
+                                                <button disabled={handleDisabled()}
+                                                        className={`${handleDisabled() ? styles.btn : styles.enabled}`}
+                                                        onClick={() => showRazorPay()}>Submit
                                                 </button>
                                             </div>
                                         </div>

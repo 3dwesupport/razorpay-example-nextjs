@@ -1,4 +1,3 @@
-import Razorpay from "razorpay";
 import {validatePaymentVerification} from "razorpay/dist/utils/razorpay-utils";
 const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient();
@@ -14,12 +13,12 @@ export default async function postTransaction(req: any, res: any) {
         "payment_link_status": query.razorpay_payment_link_status,
     }, query.razorpay_signature, 'SgtJVdB2M4OnPtaK5SMo205d');
 
-        const options = {
-            id:nanoid(10),
-            gateway: "razorpay",
-            paymentId:query.razorpay_payment_id,
-            paymentStatus:query.razorpay_payment_link_status
-        }
+    const options = {
+        id: nanoid(10),
+        gateway: "razorpay",
+        paymentId: query.razorpay_payment_id,
+        paymentStatus: query.razorpay_payment_link_status
+    }
     await prisma.Razorpay_Link
         .createMany({
             data: [options]

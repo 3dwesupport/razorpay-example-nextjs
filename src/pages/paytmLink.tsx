@@ -24,11 +24,8 @@ const PaytmLink = () => {
 
                             </div>
                             <div className={styles.values}>
-                                {data?.longUrl && <Link href={(data?.longUrl).toString()}></Link>}
-                                <div>
-                                    {data?.longUrl}
-                                </div>
-                                <div>{data?.shortUrl}</div>
+                                <div onClick={() => window.open(data?.longUrl)}> {data?.longUrl}</div>
+                                <div onClick={() => window.open(data?.shortUrl)}> {data?.shortUrl}</div>
                             </div>
                         </div>
                     </div>

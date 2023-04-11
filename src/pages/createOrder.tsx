@@ -1,12 +1,11 @@
-import React, {useState, useCallback} from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import styles from '@/styles/Home.module.css'
 import {Container, createTheme, TextField, ThemeProvider} from "@mui/material";
 import {useRouter} from "next/router";
 import {Loading} from "@/Component/Loading";
 import {SelectInputBox} from "@/Component/selectInputBox";
-import {availableGateway, currencyOptions} from "@/constants";
-
+import {currencyOptions} from "@/constants";
 const theme = createTheme();
 
 /**
@@ -19,20 +18,18 @@ const CreateOrder = () => {
     const [currency, setCurrency] = useState('');
     const [receipt, setReceipt] = useState('');
     const [razorpayId, setRazorpayId] = useState('');
-    const [error, setError] = useState('');
-    const [value, setValue] = useState('');
-    // const [value, setError] = useState('');
+    const [error, setError] = useState(false);
     const router = useRouter();
     let data: any;
     //handle onclick event on create Order
     const handleCreateOrder = async (e: any) => {
         setActive(true)
         e.preventDefault();
-        if (razorpayId.length == 0) {
+        if (razorpayId.length <= 18 || receipt.length <= 5) {
             setError(true)
         }
         data = { //create data for api calling
-            amount: parseInt(amount),
+            amount: parseInt(amount*100),
             currency: currency,
             receipt: receipt,
         }
@@ -53,28 +50,22 @@ const CreateOrder = () => {
             }
         })
     }
+
+    const handleAmount = (e) => {
+        const input = e.target.value;
+        const regex =  /^\d+(\.\d{0,9})?$/; // pattern for numeric and decimal values
+        if (regex.test(input) || input === '') {
+            setAmount(input);
+        }
+    }
     //handle onClick Disabled
     const handleDisabled = () => {
-        return !(razorpayId && amount && currency && receipt);
+        return !(razorpayId.length >= 18 && amount && currency && receipt.length >= 5);
     }
-
-    const handleRazorpayId = (value) => {
-        setRazorpayId(value)
-        if (value.length <= 18) setError("please enter a valid razorpay id")
-        else setError("")
-    }
-    const handleReceipt=(value)=>{
-        setReceipt(value)
-        if(value.length<=5)
-            setValue("please enter a valid receipt number")
-        else setValue("")
-    }
-
-    const handleCurrency=(e:any)=>{
+    const handleCurrency = (e: any) => {
         let selectedItem: any = currencyOptions.find((item: any) => item.currency === e.target.value);//find the object having gateway value of customers selected gateway
         setCurrency(selectedItem.currency);//assign value to the variable for the selected metal
     }
-
     return (
         <div>
             <div className={styles.main}>
@@ -95,19 +86,20 @@ const CreateOrder = () => {
                                                            variant="outlined"
                                                            value={razorpayId}
                                                            className={styles.input}
-                                                           onChange={e => handleRazorpayId(e.target.value)}
+                                                           onChange={e => setRazorpayId(e.target.value)}
                                                 />
                                             </div>
-                                            <label>{error}</label>
-
+                                            {!error && (razorpayId.length <= 18 && razorpayId.length != 0) ?
+                                                <label className={styles.error}>Enter a valid RazorpayId
+                                                </label> : ""
+                                            }
                                             <div className={styles.textInput}>
                                                 <TextField id="outlined-basic"
                                                            label="Amount"
                                                            variant="outlined"
                                                            value={amount}
                                                            className={styles.input}
-                                                           onChange={(e: any) =>
-                                                               setAmount(e.target.value)}
+                                                           onChange={handleAmount}
                                                 />
                                             </div>
                                             <div className={styles.textInputValue}>
@@ -127,10 +119,14 @@ const CreateOrder = () => {
                                                            variant="outlined"
                                                            value={receipt}
                                                            className={styles.input}
-                                                           onChange={(e: any) => handleReceipt(e.target.value)}
+                                                           onChange={(e: any) => setReceipt(e.target.value)}
                                                 />
                                             </div>
-                                            <label>{value}</label>
+                                            {!error && (receipt.length < 5 && receipt.length != 0) ?
+                                                <label className={styles.error}>Enter a receipt id
+                                                </label> : ""
+                                            }
+
                                             <div className={styles.buttonStyle}>
                                                 <button disabled={handleDisabled()}
                                                         className={`${handleDisabled() ? styles.btn : styles.enabled}`}

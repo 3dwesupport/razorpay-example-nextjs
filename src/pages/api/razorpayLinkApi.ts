@@ -1,7 +1,4 @@
-import {NextApiRequest, NextApiResponse} from "next";
 import Razorpay from "razorpay";
-
-
 export default async function handler(req: any, res: any) {
     var instance = new Razorpay(
         {
@@ -13,15 +10,15 @@ export default async function handler(req: any, res: any) {
     const requestAsync = async () => {
         return new Promise((resolve, reject) => {
             let localData = instance.paymentLink.create({
-                amount: req.body.amount,
+                amount: req.body.amount *100,
                 currency: req.body.currency,
                 accept_partial: true,
                 first_min_partial_amount: 100,
                 description: req.body.description,
                 customer: {
-                    name: "Gaurav Kumar",
-                    email: "gaurav.kumar@example.com",
-                    contact: "+919000090000"
+                    name: req.body.username,
+                    email: req.body.email,
+                    contact: req.body.mobileNo
                 },
                 notify: {
                     sms: true,
@@ -38,5 +35,6 @@ export default async function handler(req: any, res: any) {
         })
     }
     let result = await requestAsync()
+    console.log("result is :::::::::::::::",result)
     res.status(200).json(result);
 }
