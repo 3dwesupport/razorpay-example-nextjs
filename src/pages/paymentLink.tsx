@@ -22,18 +22,6 @@ const PaymentLink = () => {
         }))
         const currentResponse = await res.json()
         if (currentResponse) {
-
-            const data = {
-                linkId: currentResponse.linkId
-            }
-            // let response = await fetch("/api/checkPaymentStatus", {
-            //     method: "POST", // or 'PUT'
-            //     headers: {
-            //         "Content-Type": "application/json",
-            //     },
-            //     body: JSON.stringify(data),
-            // })
-            // await currentResponse.then((res:any) => {
                 await router.push({
                     pathname: "/paytmLink",
                     query: currentResponse,
@@ -55,6 +43,19 @@ const PaymentLink = () => {
                             <div className={styles.heading}>Create Paytm Links</div>
                             <div className={styles.horizontalLine}></div>
                             <div className={styles.form}>
+                                <div className={styles.textInput}>
+                                    <TextField id="outlined-basic" label="Merchant ID" variant="outlined"
+                                               value={userData?.mid}
+                                               className={styles.input}
+                                               onChange={(e) => setUserData((prevState) => ({
+                                                   ...prevState,
+                                                   mid: e.target.value
+                                               }))}/>
+                                </div>
+                                {!error && (userData?.mid?.length < 20 && userData?.mid?.length != 0) ?
+                                    <label className={styles.error}>Enter a valid MID
+                                    </label> : ""
+                                }
                                 <div className={styles.textInput}>
                                     <TextField id="outlined-basic" label="Amount" variant="outlined"
                                                value={userData?.amount}

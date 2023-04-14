@@ -7,7 +7,10 @@ import {Loading} from "@/Component/Loading";
 const PaytmOrder = () => {
     const [amount, setAmount] = useState("")
     const [isActive, setIsActive] = useState(false)
+    const[mid,setMid]=useState("")
+    const[error,setError]=useState(false)
     const showPaytm = async () => {
+        setError(true)
         setIsActive(true)
         const value = await loadScript(`${paytmConfig.PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${paytmConfig.mid}.js`)
         if (!value) {
@@ -16,7 +19,7 @@ const PaytmOrder = () => {
         }
 
         let orderId = Math.floor(Math.random() * Date.now());
-        const data = {amount, orderId};
+        const data = {amount, orderId,mid};
         let res = await fetch("/api/preTransaction", {
             method: "POST", // or 'PUT'
             headers: {
@@ -33,11 +36,10 @@ const PaytmOrder = () => {
                 "orderId": orderId,/* update order id */
                 "token": txnToken, /* update token value */
                 "tokenType": "TXN_TOKEN",
-                "amount": amount /* update amount */
+                "amount": parseInt(amount) /* update amount */
             },
             "handler": {
                 "notifyMerchant": function (eventName: any, data: any) {
-                    console.log("notifyMerchant handler function called");
                     console.log("eventName => ", eventName);
                     console.log("data => ", data);
                 }
@@ -50,7 +52,6 @@ const PaytmOrder = () => {
                     // after successfully updating configuration, invoke JS Checkout
                     window.Paytm.CheckoutJS.invoke();
                 }).catch(function onError(error: any) {
-                    console.log("error => ", error);
                 });
             });
         }
@@ -64,7 +65,7 @@ const PaytmOrder = () => {
         }
     }
     const handleDisabled = () => {
-        return !(amount);
+        return !(amount && mid.length>=20);
     }
     return (
         <div className={styles.main}>
@@ -78,6 +79,16 @@ const PaytmOrder = () => {
                             <div className={styles.heading}>Create Order</div>
                             <div className={styles.horizontalLine}></div>
                             <div className={styles.form}>
+                                <div className={styles.textInput}>
+                                    <TextField id="outlined-basic" label="Merchant ID" variant="outlined"
+                                               value={mid}
+                                               className={styles.input}
+                                               onChange={e => setMid(e.target.value)}/>
+                                </div>
+                                {!error && (mid.length < 20 && mid.length != 0) ?
+                                    <label className={styles.error}>Enter a valid MID
+                                    </label> : ""
+                                }
                                 <div className={styles.textInput}>
                                     <TextField id="outlined-basic" label="Amount" variant="outlined"
                                                value={amount}

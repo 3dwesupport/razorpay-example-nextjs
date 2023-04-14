@@ -6,6 +6,9 @@ import {useRouter} from "next/router";
 import {Loading} from "@/Component/Loading";
 import {SelectInputBox} from "@/Component/selectInputBox";
 import {currencyOptions} from "@/constants";
+import Image from 'next/image'
+import logo_full from "../../public/logo_full.png"
+
 const theme = createTheme();
 
 /**
@@ -29,7 +32,7 @@ const CreateOrder = () => {
             setError(true)
         }
         data = { //create data for api calling
-            amount: parseInt(amount*100),
+            amount: parseInt(amount * 100),
             currency: currency,
             receipt: receipt,
         }
@@ -53,7 +56,7 @@ const CreateOrder = () => {
 
     const handleAmount = (e) => {
         const input = e.target.value;
-        const regex =  /^\d+(\.\d{0,9})?$/; // pattern for numeric and decimal values
+        const regex = /^\d+(\.\d{0,9})?$/; // pattern for numeric and decimal values
         if (regex.test(input) || input === '') {
             setAmount(input);
         }
@@ -75,63 +78,77 @@ const CreateOrder = () => {
                             isActive ?
                                 <Loading/>
                                 :
-                                <div className={styles.App}>
-                                    <div className={styles.tab}>
-                                        <div className={styles.heading}>Create Order</div>
-                                        <div className={styles.horizontalLine}></div>
-                                        <div className={styles.form}>
-                                            <div className={styles.textInput}>
-                                                <TextField id="outlined-basic"
-                                                           label="RazorpayId"
-                                                           variant="outlined"
-                                                           value={razorpayId}
-                                                           className={styles.input}
-                                                           onChange={e => setRazorpayId(e.target.value)}
-                                                />
-                                            </div>
-                                            {!error && (razorpayId.length <= 18 && razorpayId.length != 0) ?
-                                                <label className={styles.error}>Enter a valid RazorpayId
-                                                </label> : ""
-                                            }
-                                            <div className={styles.textInput}>
-                                                <TextField id="outlined-basic"
-                                                           label="Amount"
-                                                           variant="outlined"
-                                                           value={amount}
-                                                           className={styles.input}
-                                                           onChange={handleAmount}
-                                                />
-                                            </div>
-                                            <div className={styles.textInputValue}>
-                                                <SelectInputBox
-                                                    styles={{width: "100%"}}
-                                                    label='Currency'
-                                                    selectInputStyle={styles.textFieldValue}
-                                                    defaultValue={currency}
-                                                    selectField={currency}
-                                                    items={currencyOptions.map((type: any) => type.currency)}
-                                                    onFieldChange={(e: any) => handleCurrency(e)}
-                                                />
-                                            </div>
-                                            <div className={styles.textInput}>
-                                                <TextField id="outlined-basic"
-                                                           label="Receipt"
-                                                           variant="outlined"
-                                                           value={receipt}
-                                                           className={styles.input}
-                                                           onChange={(e: any) => setReceipt(e.target.value)}
-                                                />
-                                            </div>
-                                            {!error && (receipt.length < 5 && receipt.length != 0) ?
-                                                <label className={styles.error}>Enter a receipt id
-                                                </label> : ""
-                                            }
 
-                                            <div className={styles.buttonStyle}>
-                                                <button disabled={handleDisabled()}
-                                                        className={`${handleDisabled() ? styles.btn : styles.enabled}`}
-                                                        onClick={handleCreateOrder}>Create Order
-                                                </button>
+                                <div className={styles.mainContainer}>
+                                    <div className={styles.App}>
+                                        <div className={styles.image}>
+                                            <Image
+                                                src={logo_full}
+                                                alt="Picture of the author"
+                                                width="5%"
+                                                height="auto"
+                                            />
+                                        </div>
+
+                                    </div>
+                                    <div className={styles.App}>
+                                        <div className={styles.tab}>
+                                            <div className={styles.heading}>Create Order</div>
+                                            <div className={styles.horizontalLine}></div>
+                                            <div className={styles.form}>
+                                                <div className={styles.textInput}>
+                                                    <TextField id="outlined-basic"
+                                                               label="RazorpayId"
+                                                               variant="outlined"
+                                                               value={razorpayId}
+                                                               className={styles.input}
+                                                               onChange={e => setRazorpayId(e.target.value)}
+                                                    />
+                                                </div>
+                                                {!error && (razorpayId.length <= 18 && razorpayId.length != 0) ?
+                                                    <label className={styles.error}>Enter a valid RazorpayId
+                                                    </label> : ""
+                                                }
+                                                <div className={styles.textInput}>
+                                                    <TextField id="outlined-basic"
+                                                               label="Amount"
+                                                               variant="outlined"
+                                                               value={amount}
+                                                               className={styles.input}
+                                                               onChange={handleAmount}
+                                                    />
+                                                </div>
+                                                <div className={styles.textInputValue}>
+                                                    <SelectInputBox
+                                                        styles={{width: "100%"}}
+                                                        label='Currency'
+                                                        selectInputStyle={styles.textFieldValue}
+                                                        defaultValue={currency}
+                                                        selectField={currency}
+                                                        items={currencyOptions.map((type: any) => type.currency)}
+                                                        onFieldChange={(e: any) => handleCurrency(e)}
+                                                    />
+                                                </div>
+                                                <div className={styles.textInput}>
+                                                    <TextField id="outlined-basic"
+                                                               label="Receipt"
+                                                               variant="outlined"
+                                                               value={receipt}
+                                                               className={styles.input}
+                                                               onChange={(e: any) => setReceipt(e.target.value)}
+                                                    />
+                                                </div>
+                                                {!error && (receipt.length < 5 && receipt.length != 0) ?
+                                                    <label className={styles.error}>Enter a receipt id
+                                                    </label> : ""
+                                                }
+
+                                                <div className={styles.buttonStyle}>
+                                                    <button disabled={handleDisabled()}
+                                                            className={`${handleDisabled() ? styles.btn : styles.enabled}`}
+                                                            onClick={handleCreateOrder}>Create Order
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

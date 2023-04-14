@@ -5,10 +5,9 @@ const PaytmChecksum = require('paytmchecksum');
 export default async function handler(req:any, res:any) {
     if (req.method === 'POST') {
         let paytmParams = {}
-
         paytmParams.body = {
             "requestType": "Payment",
-            "mid": paytmConfig.mid,
+            "mid": req.body.mid,
             "websiteName": "WEBSTAGING",
             "orderId": req.body.orderId,
             "callbackUrl": "http://localhost:3000/api/postTransaction",
@@ -36,7 +35,7 @@ export default async function handler(req:any, res:any) {
                     /* for Staging */
                     hostname: 'securegw.paytm.in',
                     port: 443,
-                    path: `/theia/api/v1/initiateTransaction?mid=${paytmConfig.mid}&orderId=${req.body.orderId}`,
+                    path: `/theia/api/v1/initiateTransaction?mid=${req.body.mid}&orderId=${req.body.orderId}`,
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -65,7 +64,9 @@ export default async function handler(req:any, res:any) {
             })
         }
         let result = await requestAsync()
+        console.log("value is ::::::::::::::",result)
         res.status(200).json(result);
+
     }
 }
 

@@ -9,6 +9,9 @@ const RazorpayLink = () => {
         <div className={styles.main}>
             <div className={styles.container}>
                 <div className={styles.heading}>RazorPay Payment Url</div>
+                <div className={styles.responseData}>
+                    {JSON.stringify(data, null, 3)}
+                </div>
                 {Object.keys(data).length > 0 &&
                     <div className={styles.headingFont}>
 

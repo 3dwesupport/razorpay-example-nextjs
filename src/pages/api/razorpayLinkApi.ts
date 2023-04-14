@@ -1,4 +1,7 @@
 import Razorpay from "razorpay";
+import {nanoid} from "nanoid";
+import {PrismaClient} from "@prisma/client";
+const prisma = new PrismaClient();
 export default async function handler(req: any, res: any) {
     var instance = new Razorpay(
         {
@@ -34,7 +37,40 @@ export default async function handler(req: any, res: any) {
             resolve(localData)
         })
     }
+
+
     let result = await requestAsync()
-    console.log("result is :::::::::::::::",result)
+    const data={
+        amount:req.body.amount,
+        currency:req.body.currency,
+        index_id : nanoid(10),
+        gatewayId: req.body.gatewayId,
+        gateway:"razorpay",
+        paymentStatus :result.status,
+        order_id:result.id,
+    }
+    await prisma.Payment_Info
+        .createMany({
+            data: [data]
+        })
+        .then(async (res: any) => {
+            console.log("Created", res.count, "order");
+            await prisma.Payment_Info
+                .findMany({
+                    orderBy: {
+                        order_id: 'desc'
+                    },
+                })
+                .then((res: any) => {
+                    console.log(res);
+                })
+                .catch((err: any) => {
+                    console.log("Error in fetching orders: ", err);
+                })
+        })
+        .catch((err: any) => {
+            console.log("Error in creating orders: ", err);
+        })
+
     res.status(200).json(result);
 }

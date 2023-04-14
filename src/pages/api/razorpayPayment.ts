@@ -5,31 +5,18 @@ const prisma = new PrismaClient();
 import {nanoid} from 'nanoid'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    console.log("value of the data is mzhjdjdjd ",req.body)
     const options = req.body;
     options.index_id = nanoid(10);
     options.gateway = "razorpay";
-    await prisma.Payment_Info
-        .createMany({
-            data: [options]
-        })
-        .then(async (res: any) => {
-            console.log("Created", res.count, "order");
-            await prisma.Payment_Info
-                .findMany({
-                    orderBy: {
-                        order_id: 'desc'
-                    },
-                })
-                .then((res: any) => {
-                    console.log(res);
-                })
-                .catch((err: any) => {
-                    console.log("Error in fetching orders: ", err);
-                })
-        })
-        .catch((err: any) => {
-            console.log("Error in creating orders: ", err);
-        })
+    await prisma.Payment_Info.updateMany({
+        where: {
+            order_id :req.body.order_id // The ID of the row you want to update
+        },
+        data: {
+            paymentStatus: "paid"
+        }
+    }).then()
     res.status(200).json(options);
 }
 

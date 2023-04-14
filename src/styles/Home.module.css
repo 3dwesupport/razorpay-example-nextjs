@@ -158,16 +158,20 @@
 .App {
     display: flex;
     text-align: center;
-    width: 100%;
+    width: 50%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #292929;
 }
-.btnStyle{
-
+.mainContainer{
+    display: flex;
+    flex-direction: row;
 }
 
+.image{
+    width: 40%;
+}
 .responseData {
     display: flex;
     text-align: center;

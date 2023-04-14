@@ -6,17 +6,21 @@ const prisma = new PrismaClient();
 import {nanoid} from 'nanoid'
 
 export default async function postTransaction(req: any, res: any) {
-
+    console.log("value of the req .body is ::::::::::::",req.body)
     req.body.index_id = nanoid(10);
+
     req.body.gateway = "paytm";
+
+
     const options = {
         index_id: nanoid(10),
         gateway: req.body.gateway,
-        orderId: req.body.ORDERID,
-        Status: req.body.STATUS,
-        amount: req.body.TXNAMOUNT,
+        order_id:req.body.ORDERID.toString(),
+        paymentStatus : req.body.STATUS,
+        amount: parseInt(req.body.TXNAMOUNT),
+        currency:req.body.CURRENCY,
+        gatewayId:req.body.MID,
     }
-
     /* initialize an object */
     var paytmParams = {};
     /* body parameters */
@@ -75,13 +79,13 @@ export default async function postTransaction(req: any, res: any) {
         post_req.write(post_data);
         post_req.end();
     });
-    await prisma.PaytmPayment_Info
+    await prisma.Payment_Info
         .createMany({
             data: [options]
         })
         .then(async (res: any) => {
             console.log("Created", res.count, "order");
-            await prisma.PaytmPayment_Info
+            await prisma.Payment_Info
                 .findMany({
                     orderBy: {
                         order_id: 'desc'

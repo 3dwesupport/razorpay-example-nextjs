@@ -15,6 +15,7 @@ const RazorpayPaymentLink = () => {
     const [userName, setUserName] = useState<any>("")
     const router = useRouter();
     const [error, setError] = useState(false)
+    const [razorpayId,setRazorpayId]=useState("")
     const showRazorpay = async () => {
         setError(false)
         const data: any = {
@@ -24,29 +25,24 @@ const RazorpayPaymentLink = () => {
             mobileNo: mobileNo,
             email: email,
             userName: userName,
+            gatewayId:razorpayId
         }
 
         if (!isNaN(amount) && currency === "INR") {
             await axios.post('/api/razorpayLinkApi', data).then(async (res: any) => {
                 if (res && res.data) {
-                    if (res.data.error) {
-                        await router.push({
-                            pathname: "/OrderResponseFailed",
-                            query: res.data.error,
-                        });
-                    } else {
-                        await router.push({
-                            pathname: "/razorpayResponseLink",
-                            query: res.data,
-                        });
-                    }
+                    res.data.razorpay_id = razorpayId;
+                    await router.push({
+                        pathname: "/razorpayResponseLink",
+                        query: res.data,
+                    });
                 }
+
             })
         }
     }
 
     const handleDisabled = () => {
-        console.log("error ::: ", error)
         return !(amount && description && currency && userName && email && mobileNo && !error);
     }
 
@@ -81,6 +77,19 @@ const RazorpayPaymentLink = () => {
                     <div className={styles.heading}>Create Link</div>
                     <div className={styles.horizontalLine}></div>
                     <div className={styles.form}>
+                        <div className={styles.textInput}>
+                            <TextField id="outlined-basic"
+                                       label="RazorpayId"
+                                       variant="outlined"
+                                       value={razorpayId}
+                                       className={styles.input}
+                                       onChange={e => setRazorpayId(e.target.value)}
+                            />
+                        </div>
+                        {!error && (razorpayId.length <= 18 && razorpayId.length != 0) ?
+                            <label className={styles.error}>Enter a valid RazorpayId
+                            </label> : ""
+                        }
                         <div className={styles.textInput}>
                             <TextField id="outlined-basic" label="Amount" variant="outlined"
                                        value={amount}

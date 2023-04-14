@@ -16,12 +16,12 @@ const PaymentGateWay = (params: any) => {
     const [isActive, setActive] = useState(false)
     const [razorpayId, setRazorpayId] = useState<any>("");
     const router = useRouter();
-    const data = router.query;
+    const dataValue = router.query;
     const [error,setError]=useState<any>(false)
 
     useEffect(() => {
-        setOrderId(data.journey && data.id);
-        setRazorpayId(data.journey && data.razorpay_id);
+        setOrderId(dataValue.journey && dataValue.id);
+        setRazorpayId(dataValue.journey && dataValue.razorpay_id);
     }, [])
 
     //handle onClick Disabled
@@ -39,8 +39,10 @@ const PaymentGateWay = (params: any) => {
             return;
         }
         const options = {
-            razorpay_id: razorpayId, // Enter the Key ID generated from the Dashboard
+            gatewayId: razorpayId, // Enter the Key ID generated from the Dashboard
             order_id: orderId,
+            amount:parseInt(dataValue.amount),
+            currency:dataValue.currency,
             handler: async function (response: any) {
                 data = {
                     orderCreationId: orderId,
@@ -48,6 +50,7 @@ const PaymentGateWay = (params: any) => {
                     razorpayOrderId: response.razorpay_order_id,
                     razorpaySignature: response.razorpay_signature,
                 };
+
                 await axios.post('/api/razorpayPayment', options).then(async (res: any) => {
                     await router.replace({
                         pathname: "/paymentGatewayResponse",

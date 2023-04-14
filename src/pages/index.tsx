@@ -4,7 +4,10 @@ import React, {useState} from "react";
 import {SelectInputBox} from "@/Component/selectInputBox";
 import {availableGateway, availableOptions, paytmOption} from "@/constants";
 
-
+/***
+ * Render DropDown menu for gatways
+ * @constructor
+ */
 // @ts-ignore
 export default function Home() {
     const [selectedGateway, setSelectedGateway] = useState<any>(undefined);
@@ -15,14 +18,14 @@ export default function Home() {
     // handle gateway dropdown
     const handleGateway = (e: any) => {
         let selectedItem: any = availableGateway.find((item: any) => item.gateway === e.target.value);//find the object having gateway value of customers selected gateway
-        setSelectedGateway(selectedItem.gateway);//assign value to the variable for the selected metal
-        setSelectedOptions(selectedItem.gateway === availableGateway[0].gateway ? availableOptions : paytmOption);//assign value to the variable for the selected metal
+        setSelectedGateway(selectedItem.gateway);//assign value to the variable for the selected gateway
+        setSelectedOptions(selectedItem.gateway === availableGateway[0].gateway ? availableOptions : paytmOption);//assign value to the variable for the selected options
     }
-    //handle gateway dropdown
+    //handle options dropdown
     const handleOptions = (e: any) => {
         let selectedItem: any = selectedOptions.find((item: any) => item.options === e.target.value);//find the object having gateway value of customers selected gateway
         console.log("selected", selectedItem.options)
-        setSelectedItem(selectedItem.options);//assign value to the variable for the selected metal
+        setSelectedItem(selectedItem.options);//assign value to the variable for the selected options
     }
     //handle Disabled submit button
     const handleDisabled = () => {
@@ -44,6 +47,7 @@ export default function Home() {
                     break;
                 default:
                     pathname = '/';
+
             }
         } else {
             switch (selectedItem) {
@@ -101,16 +105,6 @@ export default function Home() {
             </div>
         </>
     )
-    // return (
-    //     // <PaymentForm/>
-    //
-    //
-    //     // eslint-disable-next-line react/jsx-no-undef
-    //     <PaytmOrder/>
-    //     //   <RazorpayPaymentLink/>
-    //     // <PaymentLink/>
-    //     // x<Document/>
-    // )
 
 }
 

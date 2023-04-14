@@ -21,13 +21,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     options.order_id = nanoid(10);
     options.gateway = "razorpay";
 
-    await prisma.Orders
+    res.status(200).json(result.data);
+    const value = {
+        index_id: nanoid(10),
+        gateway: "razorpay",
+        order_id: result.data.id,
+        paymentStatus: result.data.status,
+        amount:req.body.amount,
+        currency: req.body.currency,
+        gatewayId: "rzp_test_XnlOuOZNrannpU",
+    }
+    await prisma.Payment_Info
         .createMany({
-            data: [options]
+            data: [value]
         })
         .then(async (res: any) => {
             console.log("Created", res.count, "order");
-            await prisma.Orders
+            await prisma.Payment_Info
                 .findMany({
                     orderBy: {
                         order_id: 'desc'
@@ -48,6 +58,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             isError = err
         })
 
-
-    res.status(200).json(result.data);
 }

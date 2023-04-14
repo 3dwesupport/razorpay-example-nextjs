@@ -7,35 +7,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Orders {
-  order_id    String @unique
-  gateway String
-  razorpay_id String
-  amount      Int
-  currency    String
-  receipt     String
-  @@map("Orders")
-}
-model Payment_Info {
+model Payment_Info{
   index_id String @unique
   gateway String
   order_id    String
-  razorpay_id String
+  gatewayId String
+  amount  Int
+  currency String
+  paymentStatus String
   @@map("Payment_Info")
-}
-model PaytmPayment_Info{
-  index_id String @unique
-  gateway String
-  orderId   String
-  Status String
-  amount    String
-  @@map("PaytmPayment_Info")
-}
-
-model Razorpay_Link{
-  id String @unique
-  gateway String
-  paymentId  String
-  paymentStatus   String
-  @@map("Razorpay_Link")
 }

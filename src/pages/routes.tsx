@@ -1,7 +1,7 @@
 // routes.js
 import React from "react";
 import {Routes, Route} from "react-router-dom";
-import Home from "@/pages";
+import Home from "@/pages/index";
 import CreateOrderResponse from "@/pages/createOrderResponse";
 import CreateOrder from "@/pages/createOrder";
 import OrderResponseFailed from "@/pages/OrderResponseFailed";
