@@ -2,11 +2,14 @@
   "name": "razorpay-example-nextjs",
   "version": "0.1.0",
   "private": true,
+  "https":"https://3dwesupport.github.io/razorpay-example-nextjs/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "predeploy": "next build",
+    "deploy": "next export && gh-pages -d out"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -39,6 +42,7 @@
     "typescript": "5.0.2"
   },
   "devDependencies": {
+    "gh-pages": "^5.0.0",
     "prisma": "^4.12.0"
   }
 }

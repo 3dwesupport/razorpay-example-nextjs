@@ -11,7 +11,7 @@ export default async function postTransaction(req: any, res: any) {
 
     req.body.gateway = "paytm";
 
-
+    const currentDate = new Date(Date.now())
     const options = {
         index_id: nanoid(10),
         gateway: req.body.gateway,
@@ -20,6 +20,7 @@ export default async function postTransaction(req: any, res: any) {
         amount: parseInt(req.body.TXNAMOUNT),
         currency:req.body.CURRENCY,
         gatewayId:req.body.MID,
+        paymentTime:currentDate
     }
     /* initialize an object */
     var paytmParams = {};

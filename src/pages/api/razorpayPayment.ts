@@ -5,18 +5,23 @@ const prisma = new PrismaClient();
 import {nanoid} from 'nanoid'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    console.log("value of the data is mzhjdjdjd ",req.body)
     const options = req.body;
     options.index_id = nanoid(10);
     options.gateway = "razorpay";
+    const currentDate = new Date(Date.now())
+    res.status(200).json(options);
+    console.log("value of the data is mzhjdjdjd ",options)
+
+
+
     await prisma.Payment_Info.updateMany({
         where: {
-            order_id :req.body.order_id // The ID of the row you want to update
+            order_id :req.body.order_id,// The ID of the row you want to updatr
         },
         data: {
-            paymentStatus: "paid"
+            paymentStatus: "paid",
+            paymentTime: currentDate
         }
     }).then()
-    res.status(200).json(options);
 }
 

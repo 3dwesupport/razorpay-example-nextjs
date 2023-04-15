@@ -13,7 +13,7 @@ export default async function handler(req: any, res: any) {
     const requestAsync = async () => {
         return new Promise((resolve, reject) => {
             let localData = instance.paymentLink.create({
-                amount: req.body.amount *100,
+                amount: req.body.amount,
                 currency: req.body.currency,
                 accept_partial: true,
                 first_min_partial_amount: 100,
@@ -38,16 +38,17 @@ export default async function handler(req: any, res: any) {
         })
     }
 
-
+    const currentDate = new Date(Date.now())
     let result = await requestAsync()
     const data={
-        amount:req.body.amount,
+        amount:req.body.amount/100,
         currency:req.body.currency,
         index_id : nanoid(10),
         gatewayId: req.body.gatewayId,
         gateway:"razorpay",
         paymentStatus :result.status,
         order_id:result.id,
+        paymentTime: currentDate
     }
     await prisma.Payment_Info
         .createMany({
@@ -71,6 +72,5 @@ export default async function handler(req: any, res: any) {
         .catch((err: any) => {
             console.log("Error in creating orders: ", err);
         })
-
     res.status(200).json(result);
 }

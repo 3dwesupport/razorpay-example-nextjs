@@ -11,15 +11,11 @@ const OrderResponseFailed = (params: any) => {
     const router = useRouter();
     let data = router.query;
     data.journey = "CreateOrder"
-    const showPaymentGateway = async () => {
-        await router.push({
-            pathname: "/paymentGateWay",
-            query: data
-        });
-    }
+
+    //Go to Razorpay Home screen
     const handleGoHome = async () => {
         await router.replace({
-            pathname: "/createOrder",
+            pathname: "/razorpay/razorpayPayment/createOrder",
         });
     }
     return (

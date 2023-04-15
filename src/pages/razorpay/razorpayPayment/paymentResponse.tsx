@@ -2,13 +2,18 @@ import React from "react";
 import {useRouter} from "next/router";
 import styles from '@/styles/Home.module.css'
 
-const PaymentGatewayResponse = (params: any) => {
+/**
+ * Render the Razorpay Payment Response on Screen
+ * @param params
+ * @constructor
+ */
+const PaymentResponse = (params: any) => {
     const router = useRouter();
     const data = router.query;
 
     const handleGoHome = async () => {
         await router.replace({
-            pathname: "/paymentGateWay",
+            pathname: "/razorpay/razorpayPayment/payment",
         });
     }
 
@@ -57,4 +62,4 @@ const PaymentGatewayResponse = (params: any) => {
         </>
     );
 };
-export default PaymentGatewayResponse;
+export default PaymentResponse;

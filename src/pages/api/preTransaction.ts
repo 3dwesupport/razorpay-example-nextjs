@@ -64,7 +64,6 @@ export default async function handler(req:any, res:any) {
             })
         }
         let result = await requestAsync()
-        console.log("value is ::::::::::::::",result)
         res.status(200).json(result);
 
     }

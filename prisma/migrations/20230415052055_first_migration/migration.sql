@@ -6,7 +6,8 @@ CREATE TABLE "Payment_Info" (
     "gatewayId" TEXT NOT NULL,
     "amount" INTEGER NOT NULL,
     "currency" TEXT NOT NULL,
-    "paymentStatus" TEXT NOT NULL
+    "paymentStatus" TEXT NOT NULL,
+    "paymentTime" TEXT NOT NULL
 );
 
 -- CreateIndex

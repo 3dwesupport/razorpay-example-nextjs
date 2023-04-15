@@ -1,4 +1,5 @@
 import {nanoid} from "nanoid";
+
 const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient();
 const https = require('https');
@@ -60,15 +61,17 @@ export default async function handler(req: any, res: any) {
             });
 
         }
+        const currentDate = new Date(Date.now())
         const result = await requestAsync()
         const options = {
-            amount:parseInt(req.body.amount),
+            amount: parseInt(req.body.amount),
             currency: "INR",
-            gateway:"paytm",
+            gateway: "paytm",
             index_id: nanoid(10),
-            gatewayId:req.body.mid,
-            paymentStatus : "created",
-            order_id: result.linkId.toString()
+            gatewayId: req.body.mid,
+            paymentStatus: "created",
+            order_id: result.linkId.toString(),
+            paymentTime: currentDate
         }
         await prisma.Payment_Info
             .createMany({

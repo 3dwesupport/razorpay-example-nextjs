@@ -1,26 +1,24 @@
 import styles from '@/styles/Home.module.css'
 import {useRouter} from "next/router";
 import React from "react";
-import {IoMdArrowBack} from "react-icons/io";
-import {fontFamily} from "@mui/system";
-import Image from "next/image";
-import backButton from "../../public/backButton.png";
-
 /***
- * render Response of the create order on screen
+ * render Response of the order on screen
  * @param params
  * @constructor
  */
-const CreateOrderResponse = (params: any) => {
+const OrderSuccessResponse = (params: any) => {
     const router = useRouter();
     let data = router.query;
     data.journey = "CreateOrder"
+
+    //render the screen of the razorpay payment
     const showPaymentGateway = async () => {
         await router.push({
-            pathname: "/paymentGateWay",
+            pathname: "/razorpay/razorpayPayment/payment",
             query: data
         });
     }
+    // @ts-ignore
     return (
         <>
             <div className={styles.main}>
@@ -70,4 +68,4 @@ const CreateOrderResponse = (params: any) => {
         ;
 };
 
-export default CreateOrderResponse;
+export default OrderSuccessResponse;

@@ -6,7 +6,7 @@
     padding: 6rem;
     min-height: 100vh;
     text-align: center;
-    background-color: #292929;
+    background-color: #041260;
 }
 
 .home {
@@ -22,9 +22,10 @@
     display: flex;
 }
 
-.backBtnStyle{
-    background-color:  #292929;
+.backBtnStyle {
+    background-color: #292929;
 }
+
 .btnStyle {
     margin-top: 30px;
 }
@@ -158,20 +159,55 @@
 .App {
     display: flex;
     text-align: center;
-    width: 50%;
+    width: 60%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #292929;
+    background-color: #041260;;
 }
-.mainContainer{
+.LeftDiv {
     display: flex;
-    flex-direction: row;
+    text-align: center;
+    width: 40%;
+    flex-direction: column;
+    margin-top: 10px ;
+    align-items: start;
+    background-color: #041260;;
 }
 
-.image{
-    width: 40%;
+.mainContainer {
+    display: flex;
+    flex-direction: row;
+    background-color: #041260;
 }
+
+.image {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+}
+.imageLogo{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.text{
+    color: white;
+    font-weight: bold;
+    font-size: 70px;
+    width:10%;
+    font-family: "Inter";
+    line-height: 80px;
+    letter-spacing: 0.10px;
+
+}
+
+.razorpayImage {
+    width: 30%;
+    height: 90%;
+    margin-bottom: 20px;
+}
+
 .responseData {
     display: flex;
     text-align: center;
@@ -183,12 +219,26 @@
     background-color: #f2f2f2;
     color: black;
 }
+
 .responseDataInnerSection {
     width: 90%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
+.headingGatway{
+    color: white;
+    font-weight: bold;
+    font-size: 70px;
+    width:10%;
+    font-family: "Inter";
+    line-height: 80px;
+    letter-spacing: 0.10px;
+    margin-left: 90px;
+
+
+}
+
 
 /*.App {*/
 /*    display: flex;*/
@@ -207,7 +257,7 @@
     font-family: Helvetica Neue;
     font-size: 25px;
     font-weight: inherit;
-    color: black;
+    color: #041260;
 }
 
 .headingFont {
@@ -231,10 +281,11 @@
     align-content: center;
     margin-block: 20px;
 }
+
 .textInputValue {
     width: 90%;
     align-content: center;
-    margin-block: 20px;
+    margin-inline: 22px;
 }
 
 .selectInput {
@@ -266,6 +317,7 @@
     width: 50%;
     border-radius: 10px;
 }
+
 .error {
     color: red;
     display: flex;
@@ -321,7 +373,7 @@
     margin-top: 20%;
     display: flex;
     align-items: center;
-    background-color: #292929;
+    background-color: #041260;
     justify-content: center;
 }
 
@@ -330,6 +382,7 @@
     text-transform: capitalize;
     text-align: left;
 }
+
 .textFieldValue {
     text-transform: capitalize;
     text-align: left;
@@ -338,7 +391,8 @@
 .object {
     margin-bottom: 20px;
 }
-.responseValues{
+
+.responseValues {
     display: flex;
     flex-display: row;;
     justify-content: space-evenly;
@@ -346,12 +400,14 @@
     width: 61%;
     color: black;
 }
-.values{
+
+.values {
     text-align: left;
     margin-bottom: 15px;
     cursor: pointer;
 }
-.buttonStyle{
+
+.buttonStyle {
     display: flex;
     justify-content: center;
     align-items: center;

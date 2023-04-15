@@ -15,5 +15,6 @@ model Payment_Info{
   amount  Int
   currency String
   paymentStatus String
+  paymentTime  String
   @@map("Payment_Info")
 }

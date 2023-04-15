@@ -3,9 +3,10 @@ import styles from "@/styles/Home.module.css";
 import React, {useState} from "react";
 import {SelectInputBox} from "@/Component/selectInputBox";
 import {availableGateway, availableOptions, paytmOption} from "@/constants";
+import {GateWayIcon} from "@/Component/gateWayIcon";
 
 /***
- * Render DropDown menu for gatways
+ * Render DropDown menu for gateways
  * @constructor
  */
 // @ts-ignore
@@ -37,13 +38,13 @@ export default function Home() {
         if (selectedGateway == availableGateway[0].gateway) {
             switch (selectedItem) {
                 case availableOptions[0].options:
-                    pathname = '/createOrder';
+                    pathname = '/razorpay/razorpayPayment/createOrder';
                     break;
                 case  availableOptions[1].options:
-                    pathname = '/paymentGateWay';
+                    pathname = 'razorpay/razorpayPayment/payment';
                     break;
                 case availableOptions[2].options:
-                    pathname = '/razorpayPaymentLink';
+                    pathname = 'razorpay/razorpayLink/createLink';
                     break;
                 default:
                     pathname = '/';
@@ -52,10 +53,10 @@ export default function Home() {
         } else {
             switch (selectedItem) {
                 case paytmOption[0].options:
-                    pathname = '/paytmOrder';
+                    pathname = '/paytm/paytmPayment/paytmCreateOrder';
                     break;
                 case  paytmOption[1].options:
-                    pathname = '/paymentLink';
+                    pathname = '/paytm/PaytmLink/createPaytmLink';
                     break;
                 default:
                     pathname = '/';
@@ -69,36 +70,48 @@ export default function Home() {
     }
     return (
         <>
-            <div className={styles.home}>
-                <div className={styles.tab}>
-                    <div className={styles.heading}>Payment Gateway</div>
-                    <div className={styles.horizontalLine}></div>
-                    <div className={styles.selectInput}>
-                        <SelectInputBox
-                            styles={{width: "100%"}}
-                            label='CHOOSE PAYMENT GATEWAY'
-                            selectInputStyle={styles.textFieldStyle}
-                            defaultValue={selectedGateway}
-                            selectField={selectedGateway}
-                            items={availableGateway.map((type: any) => type.gateway)}
-                            onFieldChange={(e: any) => handleGateway(e)}
-                        />
-                    </div>
-                    <div className={styles.selectInput}>
-                        <SelectInputBox
-                            styles={{width: "100%", marginLeft: "0%", marginBottom: "3%"}}
-                            label='CHOOSE OPTIONS'
-                            selectInputStyle={styles.textFieldStyle}
-                            defaultValue={selectedItem}
-                            selectField={selectedItem}
-                            items={selectedOptions?.map((type: any) => type.options)}
-                            onFieldChange={(e: any) => handleOptions(e)}
-                        />
-                        <div className={styles.btnStyle}>
-                            <button disabled={handleDisabled()}
-                                    className={`${handleDisabled() ? styles.btn : styles.enabled}`}
-                                    onClick={handleSubmit}>Submit
-                            </button>
+
+            <div className={styles.main}>
+                <div className={styles.mainContainer}>
+                    <GateWayIcon/>
+                    {/*<GatewayForm selectedGateway={selectedGateway}*/}
+                    {/*             selectedItem={selectedItem} */}
+                    {/*             handleGateway={handleGateway}*/}
+                    {/*             handleOptions={handleOptions}*/}
+                    {/*             */}
+                    {/*/>*/}
+                    <div className={styles.App}>
+                        <div className={styles.tab}>
+                            <div className={styles.heading}>Payment Gateway</div>
+                            <div className={styles.horizontalLine}></div>
+                            <div className={styles.selectInput}>
+                                <SelectInputBox
+                                    styles={{width: "100%"}}
+                                    label='CHOOSE PAYMENT GATEWAY'
+                                    selectInputStyle={styles.textFieldStyle}
+                                    defaultValue={selectedGateway}
+                                    selectField={selectedGateway}
+                                    items={availableGateway.map((type: any) => type.gateway)}
+                                    onFieldChange={(e: any) => handleGateway(e)}
+                                />
+                            </div>
+                            <div className={styles.selectInput}>
+                                <SelectInputBox
+                                    styles={{width: "100%", marginLeft: "0%", marginBottom: "3%"}}
+                                    label='CHOOSE OPTIONS'
+                                    selectInputStyle={styles.textFieldStyle}
+                                    defaultValue={selectedItem}
+                                    selectField={selectedItem}
+                                    items={selectedOptions?.map((type: any) => type.options)}
+                                    onFieldChange={(e: any) => handleOptions(e)}
+                                />
+                                <div className={styles.btnStyle}>
+                                    <button disabled={handleDisabled()}
+                                            className={`${handleDisabled() ? styles.btn : styles.enabled}`}
+                                            onClick={handleSubmit}>Submit
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -107,6 +120,19 @@ export default function Home() {
     )
 
 }
+
+export const GatewayForm=(params:any)=>{
+    const[selectedGateway,selectedItem,handleGateway,handleOptions]=params
+    return(
+        <>
+        </>
+
+    )
+}
+
+
+
+
 
 
 

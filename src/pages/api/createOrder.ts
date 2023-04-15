@@ -1,9 +1,10 @@
 // // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import {NextApiRequest, NextApiResponse} from "next";
 import {httpRequest, method} from "@/pages/api/httpRequest";
+
 const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient();
-import { nanoid } from 'nanoid'
+import {nanoid} from 'nanoid'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const options = req.body;
@@ -20,16 +21,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
     options.order_id = nanoid(10);
     options.gateway = "razorpay";
-
+    const currentDate = new Date(Date.now())
     res.status(200).json(result.data);
     const value = {
         index_id: nanoid(10),
         gateway: "razorpay",
         order_id: result.data.id,
         paymentStatus: result.data.status,
-        amount:req.body.amount,
+        amount: req.body.amount/100,
         currency: req.body.currency,
         gatewayId: "rzp_test_XnlOuOZNrannpU",
+        paymentTime: currentDate
     }
     await prisma.Payment_Info
         .createMany({
