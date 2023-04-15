@@ -1,6 +1,7 @@
 // routes.js
 import React from "react";
 import {Routes, Route, BrowserRouter} from "react-router-dom";
+// @ts-ignore
 import Home from "@/pages/index";
 import OrderSuccessResponse from "@/pages/razorpay/razorpayPayment/orderSuccessResponse";
 import OrderResponseFailed from "@/pages/razorpay/razorpayPayment/OrderResponseFailed";
