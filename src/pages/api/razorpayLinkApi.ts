@@ -39,7 +39,8 @@ export default async function handler(req: any, res: any) {
     }
 
     const currentDate = new Date(Date.now())
-    let result = await requestAsync()
+    let result:any = await requestAsync()
+    // @ts-ignore
     const data={
         amount:req.body.amount/100,
         currency:req.body.currency,
@@ -50,12 +51,14 @@ export default async function handler(req: any, res: any) {
         order_id:result.id,
         paymentTime: currentDate
     }
+    // @ts-ignore
     await prisma.Payment_Info
         .createMany({
             data: [data]
         })
         .then(async (res: any) => {
             console.log("Created", res.count, "order");
+            // @ts-ignore
             await prisma.Payment_Info
                 .findMany({
                     orderBy: {

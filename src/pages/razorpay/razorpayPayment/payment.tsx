@@ -18,7 +18,7 @@ const Payment = (params: any) => {
     const [isActive, setActive] = useState(false)
     const [razorpayId, setRazorpayId] = useState<any>("");
     const router = useRouter();
-    const dataValue = router.query;
+    const dataValue:any = router.query;
     const [error, setError] = useState<any>(false)
 
     useEffect(() => {
@@ -68,6 +68,7 @@ const Payment = (params: any) => {
             }
         };
         setActive(true)
+        // @ts-ignore
         const paymentObject = new window.Razorpay(options);
         paymentObject.open();
     }

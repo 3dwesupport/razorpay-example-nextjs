@@ -61,7 +61,7 @@ const CreateLink = () => {
         setError(!emailRegex.test(e.target.value));
     };
 
-    const handleNumericValueChange = (e) => {
+    const handleNumericValueChange = (e:any) => {
         const onlyNums = e.target.value.replace(/[^0-9]/g, '');
         if (onlyNums.length <= 10) {
             setMobileNo(onlyNums);

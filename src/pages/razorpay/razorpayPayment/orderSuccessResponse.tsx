@@ -8,7 +8,7 @@ import React from "react";
  */
 const OrderSuccessResponse = (params: any) => {
     const router = useRouter();
-    let data = router.query;
+    let data:any = router.query;
     data.journey = "CreateOrder"
 
     //render the screen of the razorpay payment
@@ -18,6 +18,7 @@ const OrderSuccessResponse = (params: any) => {
             query: data
         });
     }
+    // @ts-ignore
     // @ts-ignore
     return (
         <>

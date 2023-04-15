@@ -1,10 +1,11 @@
 import paytmConfig from "./config";
+
 const https = require('https');
 const PaytmChecksum = require('paytmchecksum');
 
-export default async function handler(req:any, res:any) {
+export default async function handler(req: any, res: any) {
     if (req.method === 'POST') {
-        let paytmParams = {}
+        let paytmParams: any = {}
         paytmParams.body = {
             "requestType": "Payment",
             "mid": req.body.mid,
@@ -44,8 +45,8 @@ export default async function handler(req:any, res:any) {
                 };
 
                 let response = "";
-                let post_req = https.request(options, function (post_res:any) {
-                    post_res.on('data', function (chunk:any) {
+                let post_req = https.request(options, function (post_res: any) {
+                    post_res.on('data', function (chunk: any) {
                         response += chunk;
                     });
 

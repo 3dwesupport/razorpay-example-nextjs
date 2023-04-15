@@ -7,7 +7,7 @@ import Image from "next/image";
 import paytmLogo from "../../../../public/paytm.png";
 
 const CreatePaytmLink = () => {
-    const [userData, setUserData] = useState({})
+    const [userData, setUserData] = useState<any>({})
     const [error, setError] = useState(false)
     const [isActive, setIsActive] = useState(false)
     const router = useRouter();
@@ -32,8 +32,10 @@ const CreatePaytmLink = () => {
         }
     }
     const handleDisabled = () => {
+        // @ts-ignore
         return !(userData?.amount && userData?.description?.length >= 3);
     }
+    // @ts-ignore
     return (
         <div className={styles.main}>
             {
@@ -47,8 +49,6 @@ const CreatePaytmLink = () => {
                                     src={paytmLogo}
                                     alt="Picture of the author"
                                     className={styles.razorpayImage}
-                                    width="39%"
-                                    height="200%"
                                 />
                             </div>
                             <div className={styles.text}>
@@ -64,7 +64,7 @@ const CreatePaytmLink = () => {
                                         <TextField id="outlined-basic" label="Merchant ID" variant="outlined"
                                                    value={userData?.mid}
                                                    className={styles.input}
-                                                   onChange={(e) => setUserData((prevState) => ({
+                                                   onChange={(e) => setUserData((prevState:any) => ({
                                                        ...prevState,
                                                        mid: e.target.value
                                                    }))}/>
@@ -77,7 +77,7 @@ const CreatePaytmLink = () => {
                                         <TextField id="outlined-basic" label="Amount" variant="outlined"
                                                    value={userData?.amount}
                                                    className={styles.input}
-                                                   onChange={(e) => setUserData((prevState) => ({
+                                                   onChange={(e) => setUserData((prevState:any) => ({
                                                        ...prevState,
                                                        amount: e.target.value
                                                    }))}
@@ -88,7 +88,7 @@ const CreatePaytmLink = () => {
                                         <TextField id="outlined-basic" label="Description" variant="outlined"
                                                    value={userData?.description}
                                                    className={styles.input}
-                                                   onChange={(e) => setUserData((prevState) => ({
+                                                   onChange={(e) => setUserData((prevState:any) => ({
                                                        ...prevState,
                                                        description: e.target.value
                                                    }))}/>

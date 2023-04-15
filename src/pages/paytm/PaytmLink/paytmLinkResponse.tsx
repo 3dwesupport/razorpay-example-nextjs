@@ -5,7 +5,9 @@ import Link from "next/link";
 
 const PaytmLinkResponse = () => {
     const router = useRouter();
-    let data = router.query;
+    let data:any = router.query;
+    // @ts-ignore
+    // @ts-ignore
     return (
 
         <div className={styles.main}>

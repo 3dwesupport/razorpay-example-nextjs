@@ -6,7 +6,7 @@ const https = require('https');
 const PaytmChecksum = require('paytmchecksum');
 export default async function handler(req: any, res: any) {
     if (req.method === 'POST') {
-        let paytmParams = {};
+        let paytmParams: any = {};
 
         paytmParams.body = {
             "mid": req.body.mid,
@@ -23,6 +23,7 @@ export default async function handler(req: any, res: any) {
         */
         const checksum = await PaytmChecksum.generateSignature(JSON.stringify(paytmParams.body), "SnuVjF30cYhMEv2D")
 
+        // @ts-ignore
         paytmParams.head = {
             "tokenType": "AES",
             "signature": checksum
@@ -62,7 +63,10 @@ export default async function handler(req: any, res: any) {
 
         }
         const currentDate = new Date(Date.now())
-        const result = await requestAsync()
+        const requestAsyncStatus = requestAsync().then((res: any) => {
+            return res.linkId.toString()
+        })
+        let result = await requestAsync()
         const options = {
             amount: parseInt(req.body.amount),
             currency: "INR",
@@ -70,7 +74,7 @@ export default async function handler(req: any, res: any) {
             index_id: nanoid(10),
             gatewayId: req.body.mid,
             paymentStatus: "created",
-            order_id: result.linkId.toString(),
+            order_id: requestAsyncStatus,
             paymentTime: currentDate
         }
         await prisma.Payment_Info

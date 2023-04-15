@@ -47,11 +47,15 @@ const PaytmCreateOrder = () => {
                 }
             }
         };
+        // @ts-ignore
         if (window.Paytm && window.Paytm.CheckoutJS) {
+            // @ts-ignore
             window.Paytm.CheckoutJS.onLoad(function excecuteAfterCompleteLoad() {
                 // initialize configuration using init method
+                // @ts-ignore
                 window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
                     // after successfully updating configuration, invoke JS Checkout
+                    // @ts-ignore
                     window.Paytm.CheckoutJS.invoke();
                 }).catch(function onError(error: any) {
                 });
@@ -59,7 +63,7 @@ const PaytmCreateOrder = () => {
         }
 
     }
-    const handleAmount = (e) => {
+    const handleAmount = (e:any) => {
         const input = e.target.value;
         const regex = /^\d+(\.\d{0,9})?$/; // pattern for numeric and decimal values
         if (regex.test(input) || input === '') {

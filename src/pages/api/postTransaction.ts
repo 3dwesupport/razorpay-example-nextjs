@@ -1,4 +1,5 @@
 import paytmConfig from "./config";
+
 const https = require('https');
 const PaytmChecksum = require('paytmchecksum');
 const {PrismaClient} = require('@prisma/client')
@@ -6,25 +7,24 @@ const prisma = new PrismaClient();
 import {nanoid} from 'nanoid'
 
 export default async function postTransaction(req: any, res: any) {
-    console.log("value of the req .body is ::::::::::::",req.body)
     req.body.index_id = nanoid(10);
-
     req.body.gateway = "paytm";
 
     const currentDate = new Date(Date.now())
     const options = {
         index_id: nanoid(10),
         gateway: req.body.gateway,
-        order_id:req.body.ORDERID.toString(),
-        paymentStatus : req.body.STATUS,
+        order_id: req.body.ORDERID.toString(),
+        paymentStatus: req.body.STATUS,
         amount: parseInt(req.body.TXNAMOUNT),
-        currency:req.body.CURRENCY,
-        gatewayId:req.body.MID,
-        paymentTime:currentDate
+        currency: req.body.CURRENCY,
+        gatewayId: req.body.MID,
+        paymentTime: currentDate
     }
     /* initialize an object */
-    var paytmParams = {};
+    let paytmParams: any = {};
     /* body parameters */
+    // @ts-ignore
     paytmParams.body = {
 
         /* Find your MID in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys */
@@ -37,8 +37,9 @@ export default async function postTransaction(req: any, res: any) {
      * Generate checksum by parameters we have in body
      * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys
      */
-    PaytmChecksum.generateSignature(JSON.stringify(paytmParams.body), paytmConfig.key).then(function (checksum:any) {
+    PaytmChecksum.generateSignature(JSON.stringify(paytmParams.body), paytmConfig.key).then(function (checksum: any) {
         /* head parameters */
+        // @ts-ignore
         paytmParams.head = {
 
             /* put generated checksum value here */
