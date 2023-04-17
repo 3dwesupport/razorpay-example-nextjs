@@ -24,7 +24,7 @@ const Payment = (params: any) => {
     useEffect(() => {
         setOrderId(dataValue.journey && dataValue.id);
         setRazorpayId(dataValue.journey && dataValue.razorpay_id);
-    }, [])
+    }, [dataValue])
 
     //handle onClick Disabled
     const handleDisabled = () => {
