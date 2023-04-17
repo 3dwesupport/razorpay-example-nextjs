@@ -50,7 +50,7 @@ Once the user has selected their desired gateway and options,
 can click the submit button.
 This will redirect them to the appropriate screen that corresponds to their chosen gateway and options
 <p>
-<img style="padding-right: 2%;" src="../home.png" alt="Playground Sign In" width="45%"/>
+<img style="padding-right: 2%;" src="./public/home.png" alt="Payment Gateway" width="45%"/>
 </p>
 
 ### Razorpay
@@ -64,7 +64,7 @@ and `Payment Link`. Each option has a specific purpose and will redirect the use
 - [PaymentLink](#PaymentLink) :  The `Payment Link` option is used when the user wants to share a payment link with others.
 
 <p>
-<img style="padding-right: 2%;" src="../razorpayOptions.png" alt="Playground Sign In" width="45%"/>
+<img style="padding-right: 2%;" src="./public/razorpayOptions.png" alt="Razorpay" width="45%"/>
 </p>
 
 ### Paytm
@@ -73,7 +73,7 @@ Similar to razorpay, paytm have two options for users to make payments: `PaytmOr
 - [PaytmOrder](#PaytmOrder) : The `PaytmOrder` option is used when the user wants to generate an order and payment via paytm.
 - [PaymentLink](#PaymentLink) :  The `Payment Link` option is used when the user wants to share a payment link with others.
 <p>
-<img style="padding-right: 2%;" src="../paytmOptions.png" alt="Playground Sign In" width="45%"/>
+<img style="padding-right: 2%;" src="./public/paytmOptions.png" alt="Payment Gateway" width="45%"/>
 </p>
 
 ### CreateOrder
@@ -82,7 +82,7 @@ order successful screen and users can proceed
 to the payment stage to complete the payment.
 
 <p>
-<img style="padding-right: 2%;" src="../createOrder.png" alt="Playground Sign In" width="45%"/>
+<img style="padding-right: 2%;" src="./public/createOrder.png" alt="Payment Gateway" width="45%"/>
 </p>
 
 ### CompletePayment
@@ -90,7 +90,7 @@ On the `Complete Payment` page of Razorpay, users can enter the required details
 
 If the payment is successful, a response displaying the payment details and status will appear on the screen. However, if the transaction fails for any reason, a message indicating the payment failure will be displayed.
 <p>
-<img style="padding-right: 2%;" src="../payment.png" alt="Playground Sign In" width="45%"/>
+<img style="padding-right: 2%;" src="./public/payment.png" alt="Payment Gateway" width="45%"/>
 </p>
 
 ### PaymentLink
@@ -98,13 +98,13 @@ If the payment is successful, a response displaying the payment details and stat
 
 Once the customer receives the link, they can click on it and be directed to a secure payment page to complete the transaction. By including their contact number and email address, they will also receive an automatic confirmation of the payment made.
 <p>
-<img style="padding-right: 2%;" src="./public/paymentLink.png" alt="Playground Sign In" width="45%"/>
+<img style="padding-right: 2%;" src="./public/paymentLink.png" alt="Payment Gateway" width="45%"/>
 </p>
 
 ### PaytmOrder
 On the `paytmOrder` page by providing details such as the `merchant ID (MID)`, `merchant key (MKEY)`, and order `amount`, clicking the "Submit" button will open the Paytm gateway on your screen for payment. The gateway will prompt you to enter the necessary details required for payment via Paytm. Once you have entered the required details and completed the payment process, Paytm will redirect you to a response screen to display the status of your transaction. This response screen will provide information on whether the transaction was successful or not
 <p>
-<img style="padding-right: 2%;" src="../PaytmOrder.png" alt="Playground Sign In" width="45%"/>
+<img style="padding-right: 2%;" src="./public/PaytmOrder.png" alt="Payment Gateway" width="45%"/>
 </p>
 
 ### PaytmLink
@@ -112,7 +112,7 @@ On the `Paytmlink` screen, you have the option to create a Paytm link by providi
 
 This payment link can then be sent to your customers via email, text message, or any other preferred mode of communication. The customer can use the link to make the payment against the transaction. This process simplifies the payment process for both you and your customer, as it eliminates the need for sharing bank account details or other sensitive information.
 <p>
-<img style="padding-right: 2%;" src="../PaytmOrder.png" alt="Playground Sign In" width="45%"/>
+<img style="padding-right: 2%;" src="./public/PaytmOrder.png" alt="Payment Gateway" width="45%"/>
 </p>
 
 
