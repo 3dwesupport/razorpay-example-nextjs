@@ -181,7 +181,7 @@ export const Receipt = (params: any) => {
     )
 }
 /**
- * Render the Mid component
+ * Render the MKey component
  * @param params
  * @constructor
  */
@@ -194,6 +194,21 @@ export const Mid=(params:any)=>{
                        className={styles.input}
                        onChange={e => setMid(e.target.value)}/>
             {!error && (mid.length < 20 && mid.length != 0) ?
+                <label className={styles.error}>Enter a valid MID
+                </label> : ""
+            }
+        </>
+    )
+}
+export const MKey=(params:any)=>{
+    const{mKey,setMKey,error}=params
+    return(
+        <>
+            <TextField id="outlined-basic" label="Merchant Key" variant="outlined"
+                       value={mKey}
+                       className={styles.input}
+                       onChange={e => setMKey(e.target.value)}/>
+            {!error && (mKey?.length < 20 && mKey?.length != 0) ?
                 <label className={styles.error}>Enter a valid MID
                 </label> : ""
             }

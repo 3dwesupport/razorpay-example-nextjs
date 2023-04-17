@@ -5,7 +5,6 @@ import {useRouter} from "next/router";
 import axios from "axios";
 import {Loading} from "@/Component/loading";
 import {RazorpayLogo} from "@/Component/razorpay/razorpayForm";
-
 const theme = createTheme();
 
 /**

@@ -9,6 +9,7 @@ const PaytmChecksum = require('paytmchecksum');
  * @param res
  */
 export default async function handler(req: any, res: any) {
+    console.log("req.body::::::::::::::",req)
     if (req.method === 'POST') {
         let paytmParams: any = {}
         paytmParams.body = {
@@ -29,7 +30,7 @@ export default async function handler(req: any, res: any) {
         * Generate checksum by parameters we have in body
         * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys
         */
-        const checksum = await PaytmChecksum.generateSignature(JSON.stringify(paytmParams.body), paytmConfig.key)
+        const checksum = await PaytmChecksum.generateSignature(JSON.stringify(paytmParams.body), req.body.mKey)
         paytmParams.head = {
             "signature": checksum
         };

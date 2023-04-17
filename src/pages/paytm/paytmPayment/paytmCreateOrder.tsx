@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import styles from "@/styles/Home.module.css";
 import paytmConfig from "../.././api/config";
 import {Loading} from "@/Component/loading";
-import {Amount, Mid} from "@/Component/razorpay/formComponent";
+import {Amount, Mid, MKey} from "@/Component/razorpay/formComponent";
 import {PaytmLogo} from "@/Component/paytm/paytmLogo";
 
 /**
@@ -13,6 +13,7 @@ const PaytmCreateOrder = () => {
     const [amount, setAmount] = useState("")
     const [isActive, setIsActive] = useState(false)
     const [mid, setMid] = useState("")
+    const [mKey, setMKey] = useState("")
     const [error, setError] = useState(false)
 
     //render the paytm payment gateway
@@ -25,7 +26,7 @@ const PaytmCreateOrder = () => {
             return;
         }
         let orderId = Math.floor(Math.random() * Date.now());
-        const data = {amount, orderId, mid};
+        const data = {amount, orderId, mid,mKey};
         let res = await fetch("/api/paytm/paytmPreTransaction", {
             method: "POST", // or 'PUT'
             headers: {
@@ -95,6 +96,10 @@ const PaytmCreateOrder = () => {
                                         <Mid
                                             mid={mid}
                                             setMid={setMid}
+                                            error={error}/>
+                                        <MKey
+                                            mkey={mKey}
+                                            setMKey={setMKey}
                                             error={error}/>
                                         <Amount
                                             amount={amount}
