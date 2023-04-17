@@ -2,9 +2,8 @@ import styles from "@/styles/Home.module.css";
 import {TextField} from "@mui/material";
 import React, {useState} from "react";
 import {useRouter} from "next/router";
-import {Loading} from "@/Component/Loading";
-import Image from "next/image";
-import paytmLogo from "../../../../public/paytm.png";
+import {Loading} from "@/Component/loading";
+import {PaytmLogo} from "@/Component/paytm/paytmLogo";
 
 const CreatePaytmLink = () => {
     const [userData, setUserData] = useState<any>({})
@@ -15,7 +14,7 @@ const CreatePaytmLink = () => {
     const createPaytmLink = async () => {
         setIsActive(true)
         setError(true)
-        let res = await (await fetch("/api/createLinkApi", {
+        let res = await (await fetch("/api/paytm/createLinkApi", {
             method: "POST", // or 'PUT'
             headers: {
                 "Content-Type": "application/json",
@@ -35,7 +34,6 @@ const CreatePaytmLink = () => {
         // @ts-ignore
         return !(userData?.amount && userData?.description?.length >= 3);
     }
-    // @ts-ignore
     return (
         <div className={styles.main}>
             {
@@ -43,18 +41,7 @@ const CreatePaytmLink = () => {
                     <Loading/>
                     :
                     <div className={styles.mainContainer}>
-                        <div className={styles.LeftDiv}>
-                            <div className={styles.image}>
-                                <Image
-                                    src={paytmLogo}
-                                    alt="Picture of the author"
-                                    className={styles.razorpayImage}
-                                />
-                            </div>
-                            <div className={styles.text}>
-                                Test Paytm Gateway
-                            </div>
-                        </div>
+                        <PaytmLogo/>
                         <div className={styles.App}>
                             <div className={styles.tab}>
                                 <div className={styles.heading}>Create Paytm Links</div>
@@ -64,7 +51,7 @@ const CreatePaytmLink = () => {
                                         <TextField id="outlined-basic" label="Merchant ID" variant="outlined"
                                                    value={userData?.mid}
                                                    className={styles.input}
-                                                   onChange={(e) => setUserData((prevState:any) => ({
+                                                   onChange={(e) => setUserData((prevState: any) => ({
                                                        ...prevState,
                                                        mid: e.target.value
                                                    }))}/>
@@ -77,7 +64,7 @@ const CreatePaytmLink = () => {
                                         <TextField id="outlined-basic" label="Amount" variant="outlined"
                                                    value={userData?.amount}
                                                    className={styles.input}
-                                                   onChange={(e) => setUserData((prevState:any) => ({
+                                                   onChange={(e) => setUserData((prevState: any) => ({
                                                        ...prevState,
                                                        amount: e.target.value
                                                    }))}
@@ -88,7 +75,7 @@ const CreatePaytmLink = () => {
                                         <TextField id="outlined-basic" label="Description" variant="outlined"
                                                    value={userData?.description}
                                                    className={styles.input}
-                                                   onChange={(e) => setUserData((prevState:any) => ({
+                                                   onChange={(e) => setUserData((prevState: any) => ({
                                                        ...prevState,
                                                        description: e.target.value
                                                    }))}/>
@@ -107,9 +94,9 @@ const CreatePaytmLink = () => {
                             </div>
                         </div>
                     </div>
-                        }
-                    </div>
-
-                )
             }
-            export default CreatePaytmLink
+        </div>
+
+    )
+}
+export default CreatePaytmLink

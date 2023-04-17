@@ -2,6 +2,11 @@ import {validatePaymentVerification} from "razorpay/dist/utils/razorpay-utils";
 const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient();
 
+/**
+ * return the status of  payment against a payment link
+ * @param req
+ * @param res
+ */
 export default async function postTransaction(req: any, res: any) {
     const query = req.query;
     const status = validatePaymentVerification({

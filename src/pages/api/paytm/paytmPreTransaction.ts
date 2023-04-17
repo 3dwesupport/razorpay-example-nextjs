@@ -1,8 +1,13 @@
-import paytmConfig from "./config";
+import paytmConfig from "../config";
 
 const https = require('https');
 const PaytmChecksum = require('paytmchecksum');
 
+/**
+ * handle the paytm transaction
+ * @param req
+ * @param res
+ */
 export default async function handler(req: any, res: any) {
     if (req.method === 'POST') {
         let paytmParams: any = {}
@@ -11,7 +16,7 @@ export default async function handler(req: any, res: any) {
             "mid": req.body.mid,
             "websiteName": "WEBSTAGING",
             "orderId": req.body.orderId,
-            "callbackUrl": "http://localhost:3000/api/postTransaction",
+            "callbackUrl": "http://localhost:3000/api/paytm/paytmPostTransaction",
             "txnAmount": {
                 "value": req.body.amount,
                 "currency": "INR",

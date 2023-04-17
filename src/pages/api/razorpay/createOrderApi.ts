@@ -1,4 +1,3 @@
-// // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import {NextApiRequest, NextApiResponse} from "next";
 import {httpRequest, method} from "@/pages/api/httpRequest";
 
@@ -6,6 +5,11 @@ const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient();
 import {nanoid} from 'nanoid'
 
+/**
+ * create Order api for razorpay
+ * @param req
+ * @param res
+ */
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const options = req.body;
     let isProcessed = false;
@@ -28,7 +32,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         gateway: "razorpay",
         order_id: result.data.id,
         paymentStatus: result.data.status,
-        amount: req.body.amount/100,
+        amount: req.body.amount / 100,
         currency: req.body.currency,
         gatewayId: "rzp_test_XnlOuOZNrannpU",
         paymentTime: currentDate

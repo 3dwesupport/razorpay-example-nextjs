@@ -6,7 +6,7 @@ import {availableGateway, availableOptions, paytmOption} from "@/constants";
 import {GateWayIcon} from "@/Component/gateWayIcon";
 
 /***
- * Render DropDown menu for gateways
+ * Render SelectInputBox  for gateways
  * @constructor
  */
 // @ts-ignore
@@ -74,12 +74,6 @@ export default function Home() {
             <div className={styles.main}>
                 <div className={styles.mainContainer}>
                     <GateWayIcon/>
-                    {/*<GatewayForm selectedGateway={selectedGateway}*/}
-                    {/*             selectedItem={selectedItem} */}
-                    {/*             handleGateway={handleGateway}*/}
-                    {/*             handleOptions={handleOptions}*/}
-                    {/*             */}
-                    {/*/>*/}
                     <div className={styles.App}>
                         <div className={styles.tab}>
                             <div className={styles.heading}>Payment Gateway</div>
@@ -94,8 +88,6 @@ export default function Home() {
                                     items={availableGateway.map((type: any) => type.gateway)}
                                     onFieldChange={(e: any) => handleGateway(e)}
                                 />
-                            </div>
-                            <div className={styles.selectInput}>
                                 <SelectInputBox
                                     styles={{width: "100%", marginLeft: "0%", marginBottom: "3%"}}
                                     label='CHOOSE OPTIONS'
@@ -121,14 +113,6 @@ export default function Home() {
 
 }
 
-export const GatewayForm=(params:any)=>{
-    const[selectedGateway,selectedItem,handleGateway,handleOptions]=params
-    return(
-        <>
-        </>
-
-    )
-}
 
 
 

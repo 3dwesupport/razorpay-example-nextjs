@@ -1,15 +1,15 @@
 import React from "react";
 import {useRouter} from "next/router";
 import styles from "@/styles/Home.module.css";
-import Link from "next/link";
 
+/**
+ * Rendet the Paytm Link Response (Link Url)
+ * * @constructor
+ */
 const PaytmLinkResponse = () => {
     const router = useRouter();
-    let data:any = router.query;
-    // @ts-ignore
-    // @ts-ignore
+    let data: any = router.query;
     return (
-
         <div className={styles.main}>
             <div className={styles.container}>
                 <div className={styles.heading}>Payment Url</div>
@@ -18,7 +18,6 @@ const PaytmLinkResponse = () => {
                 </div>
                 {Object.keys(data).length > 0 &&
                     <div className={styles.headingFont}>
-
                         <div className={styles.responseValues}>
                             <div className={styles.values}>
                                 <div>LongUrl</div>
@@ -27,7 +26,6 @@ const PaytmLinkResponse = () => {
                             <div className={styles.values}>
                                 <div>:</div>
                                 <div>:</div>
-
                             </div>
                             <div className={styles.values}>
                                 <div onClick={() => window.open(data?.longUrl)}> {data?.longUrl}</div>

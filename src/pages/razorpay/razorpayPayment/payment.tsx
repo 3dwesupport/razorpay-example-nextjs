@@ -3,7 +3,7 @@ import styles from '@/styles/Home.module.css'
 import {Container, createTheme, TextField, ThemeProvider} from "@mui/material";
 import {useRouter} from "next/router";
 import axios from "axios";
-import {Loading} from "@/Component/Loading";
+import {Loading} from "@/Component/loading";
 import {RazorpayLogo} from "@/Component/razorpay/razorpayForm";
 
 const theme = createTheme();
@@ -53,7 +53,7 @@ const Payment = (params: any) => {
                     razorpaySignature: response.razorpay_signature,
                 };
 
-                await axios.post('/api/razorpayPayment', options).then(async (res: any) => {
+                await axios.post('/api/razorpay/razorpayPayment', options).then(async (res: any) => {
                     await router.replace({
                         pathname: "/razorpay/razorpayPayment/paymentResponse",
                         query: data,

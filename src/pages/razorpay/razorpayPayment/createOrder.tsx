@@ -3,7 +3,7 @@ import axios from "axios";
 import styles from '@/styles/Home.module.css'
 import {Container, createTheme,ThemeProvider} from "@mui/material";
 import {useRouter} from "next/router";
-import {Loading} from "@/Component/Loading";
+import {Loading} from "@/Component/loading";
 import {currencyOptions} from "@/constants";
 import {CreateOrderForm} from "@/Component/razorpay/razorpayForm";
 const theme = createTheme();
@@ -33,7 +33,7 @@ const CreateOrder = () => {
             currency: currency,
             receipt: receipt,
         }
-        await axios.post('/api/createOrder', data).then(async (res: any) => {
+        await axios.post('/api/razorpay/createOrderApi', data).then(async (res: any) => {
             if (res && res.data) {
                 res.data.razorpay_id = razorpayId;
                 if (res.data.error) {

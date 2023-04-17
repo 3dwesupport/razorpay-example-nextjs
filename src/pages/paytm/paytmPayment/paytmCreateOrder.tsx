@@ -1,16 +1,21 @@
 import React, {useState} from "react";
 import styles from "@/styles/Home.module.css";
 import paytmConfig from "../.././api/config";
-import {TextField} from "@mui/material";
-import {Loading} from "@/Component/Loading";
-import Image from "next/image";
-import paytmLogo from "../../../../public/paytm.png";
+import {Loading} from "@/Component/loading";
+import {Amount, Mid} from "@/Component/razorpay/formComponent";
+import {PaytmLogo} from "@/Component/paytm/paytmLogo";
 
+/**
+ * Render the form to create the Paytm order
+ * @constructor
+ */
 const PaytmCreateOrder = () => {
     const [amount, setAmount] = useState("")
     const [isActive, setIsActive] = useState(false)
     const [mid, setMid] = useState("")
     const [error, setError] = useState(false)
+
+    //render the paytm payment gateway
     const showPaytm = async () => {
         setError(true)
         setIsActive(true)
@@ -19,10 +24,9 @@ const PaytmCreateOrder = () => {
             alert("Paytm SDK failed to load. Are you online?");
             return;
         }
-
         let orderId = Math.floor(Math.random() * Date.now());
         const data = {amount, orderId, mid};
-        let res = await fetch("/api/preTransaction", {
+        let res = await fetch("/api/paytm/paytmPreTransaction", {
             method: "POST", // or 'PUT'
             headers: {
                 "Content-Type": "application/json",
@@ -61,15 +65,16 @@ const PaytmCreateOrder = () => {
                 });
             });
         }
-
     }
-    const handleAmount = (e:any) => {
+    //handle amount validation
+    const handleAmount = (e: any) => {
         const input = e.target.value;
         const regex = /^\d+(\.\d{0,9})?$/; // pattern for numeric and decimal values
         if (regex.test(input) || input === '') {
             setAmount(input);
         }
     }
+    //handle disabled submit button
     const handleDisabled = () => {
         return !(amount && mid.length >= 20);
     }
@@ -80,38 +85,20 @@ const PaytmCreateOrder = () => {
                     <Loading/>
                     :
                     <div className={styles.mainContainer}>
-                        <div className={styles.LeftDiv}>
-                            <div className={styles.image}>
-                                <Image
-                                    src={paytmLogo}
-                                    alt="Picture of the author"
-                                    className={styles.razorpayImage}
-                                />
-                            </div>
-                            <div className={styles.text}>
-                                Test Paytm Gateway
-                            </div>
-                        </div>
+                        <PaytmLogo/>
                         <div className={styles.App}>
                             <div className={styles.tab}>
                                 <div className={styles.heading}>Create Order</div>
                                 <div className={styles.horizontalLine}></div>
                                 <div className={styles.form}>
                                     <div className={styles.textInput}>
-                                        <TextField id="outlined-basic" label="Merchant ID" variant="outlined"
-                                                   value={mid}
-                                                   className={styles.input}
-                                                   onChange={e => setMid(e.target.value)}/>
-                                    </div>
-                                    {!error && (mid.length < 20 && mid.length != 0) ?
-                                        <label className={styles.error}>Enter a valid MID
-                                        </label> : ""
-                                    }
-                                    <div className={styles.textInput}>
-                                        <TextField id="outlined-basic" label="Amount" variant="outlined"
-                                                   value={amount}
-                                                   className={styles.input}
-                                                   onChange={handleAmount}/>
+                                        <Mid
+                                            mid={mid}
+                                            setMid={setMid}
+                                            error={error}/>
+                                        <Amount
+                                            amount={amount}
+                                            handleAmount={handleAmount}/>
                                     </div>
                                     <div className={styles.buttonStyle}>
                                         <button disabled={handleDisabled()}
@@ -128,18 +115,25 @@ const PaytmCreateOrder = () => {
     )
 }
 
+/**
+ * Load the script of the paytm
+ * @param src
+ */
 function loadScript(src: any) {
     return new Promise((resolve: any) => {
-        const script = document.createElement("script");
-        script.src = src;
-        script.onload = () => {
-            resolve(true);
-        };
-        script.onerror = () => {
-            resolve(false);
-        };
-        document.body.appendChild(script);
+        if (typeof window !== 'undefined') {
+            const script = document.createElement("script");
+            script.src = src;
+            script.onload = () => {
+                resolve(true);
+            };
+            script.onerror = () => {
+                resolve(false);
+            };
+            document.body.appendChild(script);
+        }
     });
 }
 
 export default PaytmCreateOrder
+

@@ -18,14 +18,12 @@ const RazorpayLink = () => {
                 </div>
                 {Object.keys(data).length > 0 &&
                     <div className={styles.headingFont}>
-
                         <div className={styles.responseValues}>
                             <div className={styles.values}>
                                 <div>Url</div>
                             </div>
                             <div className={styles.values}>
                                 <div>:</div>
-
                             </div>
                             <div className={styles.values}>
                                 <div onClick={() => window.open(data?.short_url)}>{data?.short_url}</div>

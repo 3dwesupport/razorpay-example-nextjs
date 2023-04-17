@@ -2,6 +2,11 @@ import Razorpay from "razorpay";
 import {nanoid} from "nanoid";
 import {PrismaClient} from "@prisma/client";
 const prisma = new PrismaClient();
+/**
+ * create link api for razorpay
+ * @param req
+ * @param res
+ */
 export default async function handler(req: any, res: any) {
     var instance = new Razorpay(
         {
@@ -31,7 +36,7 @@ export default async function handler(req: any, res: any) {
                 notes: {
                     policy_name: "Jeevan Bima"
                 },
-                callback_url: "http://localhost:3000/api/razorpayValues",
+                callback_url: "http://localhost:3000/api/razorpay/razorpayLinkStatus",
                 callback_method: "get"
             })
             resolve(localData)

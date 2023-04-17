@@ -1,9 +1,14 @@
 import {nanoid} from "nanoid";
-
 const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient();
 const https = require('https');
 const PaytmChecksum = require('paytmchecksum');
+
+/**
+ * response of the paytm payment link
+ * @param req
+ * @param res
+ */
 export default async function handler(req: any, res: any) {
     if (req.method === 'POST') {
         let paytmParams: any = {};
@@ -46,7 +51,6 @@ export default async function handler(req: any, res: any) {
                 };
 
                 let response = "";
-                // let data
                 let post_req = https.request(options, async function (post_res: any) {
                     post_res.on('data', function (chunk: any) {
                         response += chunk;

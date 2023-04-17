@@ -238,19 +238,6 @@
 
 
 }
-
-
-/*.App {*/
-/*    display: flex;*/
-/*    text-align: center;*/
-/*    width: 100%;*/
-/*    flex-direction: column;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    background-color:#f2f2f2 ;*/
-/*    margin-bottom: 10%;*/
-/*}*/
-
 .heading {
     /*font-family: "Comic Sans MS", serif;*/
     margin: 15px;
@@ -279,13 +266,14 @@
 .textInput {
     width: 100%;
     align-content: center;
-    margin-block: 20px;
+    margin-top: 20px;
 }
 
 .textInputValue {
     width: 90%;
     align-content: center;
     margin-inline: 22px;
+    margin-bottom: 28px;
 }
 
 .selectInput {
@@ -293,12 +281,6 @@
     margin-inline: 30px;
     margin-block: 40px;
 }
-
-.button {
-    /*margin: 20px;*/
-    /*background-color: royalblue;*/
-}
-
 .tab {
     padding-top: 10px;
     background-color: #f8f9f2;
@@ -322,10 +304,13 @@
     color: red;
     display: flex;
     width: 90%;
+    margin-left: 28px;
+    margin-bottom: 10px;
 }
 
 .input {
     width: 90%;
+    margin-bottom: 30px;
 }
 
 .btn {
@@ -378,7 +363,7 @@
 }
 
 .textFieldStyle {
-    margin: 0 0 16px 0 !important;
+    margin: 0 0 40px 0 !important;
     text-transform: capitalize;
     text-align: left;
 }

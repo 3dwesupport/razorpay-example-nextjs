@@ -1,15 +1,18 @@
-import paytmConfig from "./config";
-
+import paytmConfig from "../config";
 const https = require('https');
 const PaytmChecksum = require('paytmchecksum');
 const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient();
 import {nanoid} from 'nanoid'
 
-export default async function postTransaction(req: any, res: any) {
+/**
+ * render the paytm transaction response
+ * @param req
+ * @param res
+ */
+export default async function paytmPostTransaction(req: any, res: any) {
     req.body.index_id = nanoid(10);
     req.body.gateway = "paytm";
-
     const currentDate = new Date(Date.now())
     const options = {
         index_id: nanoid(10),
@@ -50,10 +53,6 @@ export default async function postTransaction(req: any, res: any) {
         var post_data = JSON.stringify(paytmParams);
 
         var options = {
-
-            // /* for Staging */
-            // hostname: 'securegw-stage.paytm.in',
-
             /* for Production */
             hostname: 'securegw.paytm.in',
             port: 443,

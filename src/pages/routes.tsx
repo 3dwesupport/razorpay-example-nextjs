@@ -6,18 +6,14 @@ import Home from "@/pages/index";
 import OrderSuccessResponse from "@/pages/razorpay/razorpayPayment/orderSuccessResponse";
 import OrderResponseFailed from "@/pages/razorpay/razorpayPayment/OrderResponseFailed";
 import CreateOrder from "../pages/razorpay/razorpayPayment/createOrder";
-import paymentResponse from "@/pages/razorpay/razorpayPayment/paymentResponse";
 import CreateLink from "@/pages/razorpay/razorpayLink/createLink";
-import responseRazorpayLink from "@/pages/razorpay/razorpayLink/responseRazorpayLink";
-import createPaytmLink from "@/pages/paytm/PaytmLink/createPaytmLink";
-import paytmLinkResponse from "@/pages/paytm/PaytmLink/paytmLinkResponse";
-import PaytmCreateOrder from "@/pages/paytm/paytmPayment/paytmCreateOrder";
 import PaymentFailed from "@/pages/razorpay/razorpayPayment/PaymentFailed";
 import Payment from "@/pages/razorpay/razorpayPayment/payment";
 import PaymentResponse from "@/pages/razorpay/razorpayPayment/paymentResponse";
 import CreatePaytmLink from "@/pages/paytm/PaytmLink/createPaytmLink";
 import PaytmLinkResponse from "@/pages/paytm/PaytmLink/paytmLinkResponse";
 import ResponseRazorpayLink from "@/pages/razorpay/razorpayLink/responseRazorpayLink";
+import PaytmCreateOrder from "@/pages/paytm/paytmPayment/paytmCreateOrder";
 
 const RouterCom = () => (
     <BrowserRouter>
