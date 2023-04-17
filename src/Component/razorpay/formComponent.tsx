@@ -185,9 +185,9 @@ export const Receipt = (params: any) => {
  * @param params
  * @constructor
  */
-export const Mid=(params:any)=>{
-    const{mid,setMid,error}=params
-    return(
+export const Mid = (params: any) => {
+    const {mid, setMid, error} = params
+    return (
         <>
             <TextField id="outlined-basic" label="Merchant ID" variant="outlined"
                        value={mid}
@@ -200,9 +200,9 @@ export const Mid=(params:any)=>{
         </>
     )
 }
-export const MKey=(params:any)=>{
-    const{mKey,setMKey,error}=params
-    return(
+export const MKey = (params: any) => {
+    const {mKey, setMKey, error} = params
+    return (
         <>
             <TextField id="outlined-basic" label="Merchant Key" variant="outlined"
                        value={mKey}

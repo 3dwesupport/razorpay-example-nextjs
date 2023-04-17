@@ -1,5 +1,6 @@
 import axios from "axios";
-export const httpRequest = async (req:any, url:any, _method:any, headers:any, body:any, auth = null) => {
+
+export const httpRequest = async (req: any, url: any, _method: any, headers: any, body: any, auth = null) => {
     try {
         // @ts-ignore
         return await axios({

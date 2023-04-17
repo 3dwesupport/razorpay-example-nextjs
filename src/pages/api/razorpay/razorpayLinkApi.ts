@@ -1,6 +1,7 @@
 import Razorpay from "razorpay";
 import {nanoid} from "nanoid";
 import {PrismaClient} from "@prisma/client";
+
 const prisma = new PrismaClient();
 /**
  * create link api for razorpay
@@ -44,16 +45,16 @@ export default async function handler(req: any, res: any) {
     }
 
     const currentDate = new Date(Date.now())
-    let result:any = await requestAsync()
+    let result: any = await requestAsync()
     // @ts-ignore
-    const data={
-        amount:req.body.amount/100,
-        currency:req.body.currency,
-        index_id : nanoid(10),
+    const data = {
+        amount: req.body.amount / 100,
+        currency: req.body.currency,
+        index_id: nanoid(10),
         gatewayId: req.body.gatewayId,
-        gateway:"razorpay",
-        paymentStatus :result.status,
-        order_id:result.id,
+        gateway: "razorpay",
+        paymentStatus: result.status,
+        order_id: result.id,
         paymentTime: currentDate
     }
     // @ts-ignore

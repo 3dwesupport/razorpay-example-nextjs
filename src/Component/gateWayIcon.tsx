@@ -7,8 +7,8 @@ import styles from "../styles//Home.module.css";
  * Render Gateway Icon with text on home screen
  * @constructor
  */
-export const GateWayIcon=()=>{
-    return(
+export const GateWayIcon = () => {
+    return (
         <div className={styles.LeftDiv}>
             <div className={styles.imageLogo}>
                 <Image

@@ -2,7 +2,7 @@
   "name": "razorpay-example-nextjs",
   "version": "0.1.0",
   "private": true,
-  "https":"https://3dwesupport.github.io/razorpay-example-nextjs/",
+  "https": "https://3dwesupport.github.io/razorpay-example-nextjs/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

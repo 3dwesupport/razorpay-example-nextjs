@@ -1,9 +1,10 @@
 import paytmConfig from "../config";
+import {nanoid} from 'nanoid'
+
 const https = require('https');
 const PaytmChecksum = require('paytmchecksum');
 const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient();
-import {nanoid} from 'nanoid'
 
 /**
  * render the paytm transaction response

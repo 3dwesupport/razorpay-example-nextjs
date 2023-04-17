@@ -1,9 +1,9 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import {httpRequest, method} from "@/pages/api/httpRequest";
+import {nanoid} from 'nanoid'
 
 const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient();
-import {nanoid} from 'nanoid'
 
 /**
  * create Order api for razorpay

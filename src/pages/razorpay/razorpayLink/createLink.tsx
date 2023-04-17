@@ -4,8 +4,16 @@ import axios from "axios";
 import {useRouter} from "next/router";
 import {currencyOptions} from "@/constants";
 import {Loading} from "@/Component/loading";
-import { RazorpayLogo} from "@/Component/razorpay/razorpayForm";
-import {Amount, ContactNo, Currency, Description, Email, UserName,RazorpayId} from "@/Component/razorpay/formComponent";
+import {RazorpayLogo} from "@/Component/razorpay/razorpayForm";
+import {
+    Amount,
+    ContactNo,
+    Currency,
+    Description,
+    Email,
+    RazorpayId,
+    UserName
+} from "@/Component/razorpay/formComponent";
 
 
 /**

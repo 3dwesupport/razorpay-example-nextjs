@@ -8,7 +8,7 @@ import styles from "@/styles/Home.module.css";
  */
 const RazorpayLink = () => {
     const router = useRouter();
-    let data:any = router.query;
+    let data: any = router.query;
     return (
         <div className={styles.main}>
             <div className={styles.container}>

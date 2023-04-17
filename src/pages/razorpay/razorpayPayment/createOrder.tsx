@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import axios from "axios";
 import styles from '@/styles/Home.module.css'
-import {Container, createTheme,ThemeProvider} from "@mui/material";
+import {Container, createTheme, ThemeProvider} from "@mui/material";
 import {useRouter} from "next/router";
 import {Loading} from "@/Component/loading";
 import {currencyOptions} from "@/constants";
 import {CreateOrderForm} from "@/Component/razorpay/razorpayForm";
+
 const theme = createTheme();
 
 /**
@@ -29,7 +30,7 @@ const CreateOrder = () => {
             setError(true)
         }
         data = { //create data for api calling
-            amount: parseInt(amount)*100,
+            amount: parseInt(amount) * 100,
             currency: currency,
             receipt: receipt,
         }
@@ -51,7 +52,7 @@ const CreateOrder = () => {
         })
     }
     //handle amount Validation
-    const handleAmount = (e:any) => {
+    const handleAmount = (e: any) => {
         const input = e.target.value;
         const regex = /^\d+(\.\d{0,9})?$/; // pattern for numeric and decimal values
         if (regex.test(input) || input === '') {

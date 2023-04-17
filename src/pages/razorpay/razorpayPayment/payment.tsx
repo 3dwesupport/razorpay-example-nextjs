@@ -5,6 +5,7 @@ import {useRouter} from "next/router";
 import axios from "axios";
 import {Loading} from "@/Component/loading";
 import {RazorpayLogo} from "@/Component/razorpay/razorpayForm";
+
 const theme = createTheme();
 
 /**
@@ -17,7 +18,7 @@ const Payment = (params: any) => {
     const [isActive, setActive] = useState(false)
     const [razorpayId, setRazorpayId] = useState<any>("");
     const router = useRouter();
-    const dataValue:any = router.query;
+    const dataValue: any = router.query;
     const [error, setError] = useState<any>(false)
 
     useEffect(() => {
