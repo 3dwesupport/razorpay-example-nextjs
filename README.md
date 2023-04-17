@@ -98,7 +98,7 @@ If the payment is successful, a response displaying the payment details and stat
 
 Once the customer receives the link, they can click on it and be directed to a secure payment page to complete the transaction. By including their contact number and email address, they will also receive an automatic confirmation of the payment made.
 <p>
-<img style="padding-right: 2%;" src="../paymentLink.png" alt="Playground Sign In" width="45%"/>
+<img style="padding-right: 2%;" src="./public/paymentLink.png" alt="Playground Sign In" width="45%"/>
 </p>
 
 ### PaytmOrder
@@ -108,7 +108,7 @@ On the `paytmOrder` page by providing details such as the `merchant ID (MID)`, `
 </p>
 
 ### PaytmLink
-On the Paytm link screen, you have the option to create a Paytm link by providing the necessary information such as the `MID (Merchant ID)`,  `amount` and the `description` of the transaction. Once you have entered these details, simply click on the submit button and Paytm will generate a unique payment link.
+On the `Paytmlink` screen, you have the option to create a Paytm link by providing the necessary information such as the `MID (Merchant ID)`,  `amount` and the `description` of the transaction. Once you have entered these details, simply click on the submit button and Paytm will generate a unique payment link.
 
 This payment link can then be sent to your customers via email, text message, or any other preferred mode of communication. The customer can use the link to make the payment against the transaction. This process simplifies the payment process for both you and your customer, as it eliminates the need for sharing bank account details or other sensitive information.
 <p>
