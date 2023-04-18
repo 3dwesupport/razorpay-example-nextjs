@@ -14,7 +14,7 @@ seamless payment process.
 ## Getting Started
 
 You can run this application directly from the [Link]
-(http://example.com "Link").
+(https://razorpay-example-nextjs-790wmaey9-itinker.vercel.app/ "Link").
 
 First, run the development server:
 
