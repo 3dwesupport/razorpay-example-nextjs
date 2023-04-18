@@ -10,7 +10,7 @@ const prisma = new PrismaClient();
  * @param req
  * @param res
  */
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {x
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const options = req.body;
     let isProcessed = false;
     let isError = ""
