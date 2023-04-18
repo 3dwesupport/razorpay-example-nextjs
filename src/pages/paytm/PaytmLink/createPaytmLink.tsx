@@ -14,13 +14,13 @@ const CreatePaytmLink = () => {
     const createPaytmLink = async () => {
         setIsActive(true)
         setError(true)
-        let res = await (await fetch("/api/paytm/createLinkApi", {
+        let res = await fetch("/api/paytm/createLinkApi", {
             method: "POST", // or 'PUT'
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(userData),
-        }))
+        })
         const currentResponse = await res.json()
         if (currentResponse) {
             await router.push({
@@ -57,6 +57,19 @@ const CreatePaytmLink = () => {
                                                    }))}/>
                                     </div>
                                     {!error && (userData?.mid?.length < 20 && userData?.mid?.length != 0) ?
+                                        <label className={styles.error}>Enter a valid MID
+                                        </label> : ""
+                                    }
+                                    <div className={styles.textInput}>
+                                        <TextField id="outlined-basic" label="Merchant Key" variant="outlined"
+                                                   value={userData?.mKey}
+                                                   className={styles.input}
+                                                   onChange={(e) => setUserData((prevState: any) => ({
+                                                       ...prevState,
+                                                       mKey: e.target.value
+                                                   }))}/>
+                                    </div>
+                                    {!error && (userData?.mKey?.length < 15 && userData?.mKey?.length != 0) ?
                                         <label className={styles.error}>Enter a valid MID
                                         </label> : ""
                                     }

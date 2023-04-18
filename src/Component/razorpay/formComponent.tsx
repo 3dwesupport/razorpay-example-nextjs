@@ -29,6 +29,35 @@ export const RazorpayId = (params: any) => {
         </div>
     )
 }
+
+/**
+ * render the text field razorpay Key
+ * @param params
+ * @constructor
+ */
+export const RazorpayKey = (params: any) => {
+    const {razorpayKey, setRazorpayKey, error} = params
+    let razorpayId;
+    return (
+        <div>
+            <TextField id="outlined-basic"
+                       label="RazorpayKey"
+                       variant="outlined"
+                       value={razorpayKey}
+                       className={styles.input}
+                       onChange={e => setRazorpayKey(e.target.value)}
+            />
+
+            {!error && (razorpayKey?.length <= 18 && razorpayKey?.length != 0) ?
+                <label className={styles.error}>Enter a valid RazorpayId
+                </label> : ""
+            }
+        </div>
+    )
+}
+
+
+
 /**
  * Render the amount components
  * @param params

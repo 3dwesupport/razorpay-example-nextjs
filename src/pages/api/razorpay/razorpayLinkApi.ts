@@ -10,8 +10,8 @@ const prisma = new PrismaClient();
 export default async function handler(req: any, res: any) {
     var instance = new Razorpay(
         {
-            key_id: 'rzp_test_SDSHr77Ftm5eIV',
-            key_secret: 'SgtJVdB2M4OnPtaK5SMo205d'
+            key_id: req.body.gatewayId,
+            key_secret: req.body.razorpayKey
         }
     )
 

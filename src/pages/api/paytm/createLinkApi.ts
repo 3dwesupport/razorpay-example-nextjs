@@ -26,7 +26,7 @@ export default async function handler(req: any, res: any) {
         * Generate checksum by parameters we have in body
         * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys
         */
-        const checksum = await PaytmChecksum.generateSignature(JSON.stringify(paytmParams.body), "SnuVjF30cYhMEv2D")
+        const checksum = await PaytmChecksum.generateSignature(JSON.stringify(paytmParams.body), req.body.mKey)
 
         // @ts-ignore
         paytmParams.head = {

@@ -5,7 +5,16 @@ import {useRouter} from "next/router";
 import {currencyOptions} from "@/constants";
 import {Loading} from "@/Component/loading";
 import { RazorpayLogo} from "@/Component/razorpay/razorpayForm";
-import {Amount, ContactNo, Currency, Description, Email, UserName,RazorpayId} from "@/Component/razorpay/formComponent";
+import {
+    Amount,
+    ContactNo,
+    Currency,
+    Description,
+    Email,
+    UserName,
+    RazorpayId,
+    RazorpayKey
+} from "@/Component/razorpay/formComponent";
 
 
 /**
@@ -23,6 +32,7 @@ const CreateLink = () => {
     const router = useRouter();
     const [error, setError] = useState(false)
     const [razorpayId, setRazorpayId] = useState("")
+    const [razorpayKey, setRazorpayKey] = useState("")
     const [isActive, setActive] = useState(false)
 
     //handle the  create Link functionality
@@ -36,7 +46,8 @@ const CreateLink = () => {
             mobileNo: mobileNo,
             email: email,
             userName: userName,
-            gatewayId: razorpayId
+            gatewayId: razorpayId,
+            razorpayKey:razorpayKey
         }
 
         if (!isNaN(amount) && currency === "INR") {
@@ -101,6 +112,9 @@ const CreateLink = () => {
                                     <div className={styles.textInput}>
                                         <RazorpayId razorpayId={razorpayId}
                                                     setRazorpayId={setRazorpayId}
+                                                    error={error}/>
+                                        <RazorpayKey razorpayKey={razorpayKey}
+                                                    setRazorpayKey={setRazorpayKey}
                                                     error={error}/>
                                         <Amount amount={amount}
                                                 handleAmount={handleAmount}/>

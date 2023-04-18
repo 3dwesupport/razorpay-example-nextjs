@@ -1,11 +1,12 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import styles from '@/styles/Home.module.css'
-import {Container, createTheme,ThemeProvider} from "@mui/material";
+import {Container, createTheme, ThemeProvider} from "@mui/material";
 import {useRouter} from "next/router";
 import {Loading} from "@/Component/loading";
 import {currencyOptions} from "@/constants";
 import {CreateOrderForm} from "@/Component/razorpay/razorpayForm";
+
 const theme = createTheme();
 
 /**
@@ -19,20 +20,26 @@ const CreateOrder = () => {
     const [receipt, setReceipt] = useState('');
     const [razorpayId, setRazorpayId] = useState('');
     const [error, setError] = useState(false);
+    const [razorpayKey, setRazorpayKey] = useState("")
     const router = useRouter();
     let data: any;
     //handle onclick event on create Order
     const handleCreateOrder = async (e: any) => {
+
         setActive(true)
         e.preventDefault();
         if (razorpayId.length <= 18 || receipt.length <= 5) {
             setError(true)
         }
         data = { //create data for api calling
-            amount: parseInt(amount)*100,
+            amount: parseInt(amount) * 100,
             currency: currency,
             receipt: receipt,
+            razorpay_id: razorpayId,
+            razorpayKey:razorpayKey
         }
+
+        console.log("data ::: ", data)
         await axios.post('/api/razorpay/createOrderApi', data).then(async (res: any) => {
             if (res && res.data) {
                 res.data.razorpay_id = razorpayId;
@@ -51,7 +58,7 @@ const CreateOrder = () => {
         })
     }
     //handle amount Validation
-    const handleAmount = (e:any) => {
+    const handleAmount = (e: any) => {
         const input = e.target.value;
         const regex = /^\d+(\.\d{0,9})?$/; // pattern for numeric and decimal values
         if (regex.test(input) || input === '') {
@@ -78,6 +85,8 @@ const CreateOrder = () => {
                                 :
                                 <CreateOrderForm razorpayId={razorpayId}
                                                  setRazorpayId={setRazorpayId}
+                                                 razorpayKey={razorpayKey}
+                                                 setRazorpayKey={setRazorpayKey}
                                                  error={error}
                                                  amount={amount}
                                                  handleAmount={handleAmount}

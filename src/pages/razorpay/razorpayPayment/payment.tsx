@@ -17,7 +17,8 @@ const Payment = (params: any) => {
     const [isActive, setActive] = useState(false)
     const [razorpayId, setRazorpayId] = useState<any>("");
     const router = useRouter();
-    const dataValue:any = router.query;
+    const[script,setScript]=useState(undefined)
+    const dataValue: any = router.query;
     const [error, setError] = useState<any>(false)
 
     useEffect(() => {
@@ -131,16 +132,19 @@ const Payment = (params: any) => {
 //Render the script of the razorpay
 export function loadScript(src: any) {
     return new Promise((resolve) => {
-        const script = document.createElement("script");
-        script.src = src;
-        script.onload = () => {
-            resolve(true);
-        };
-        script.onerror = () => {
-            resolve(false);
-        };
-        document.body.appendChild(script);
+            const script = document.createElement("script");
+            script.src = src;
+            script.onload = () => {
+                resolve(true);
+            };
+            script.onerror = () => {
+                resolve(false);
+            };
+            document.body.appendChild(script);
+
+
     });
+
 }
 
 export default Payment

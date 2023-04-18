@@ -1,7 +1,7 @@
 import styles from '../../styles/Home.module.css'
 import Image from 'next/image'
 import logo_full from "../../../public/Razorpay.png";
-import {Amount, Currency, RazorpayId, Receipt} from "@/Component/razorpay/formComponent";
+import {Amount, Currency, RazorpayId, RazorpayKey, Receipt} from "@/Component/razorpay/formComponent";
 import React from "react";
 
 
@@ -23,6 +23,8 @@ export const CreateOrderForm = (params: any) => {
         setReceipt,
         handleDisabled,
         handleCreateOrder,
+        razorpayKey,
+        setRazorpayKey
     } = params
 
     return (
@@ -37,6 +39,9 @@ export const CreateOrderForm = (params: any) => {
                             <RazorpayId razorpayId={razorpayId}
                                         setRazorpayId={setRazorpayId}
                                         error={error}/>
+                            <RazorpayKey razorpayKey={razorpayKey}
+                                         setRazorpayKey={setRazorpayKey}
+                                         error={error}/>
 
                             <Amount amount={amount}
                                     handleAmount={handleAmount}/>
