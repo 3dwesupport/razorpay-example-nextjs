@@ -26,7 +26,7 @@ const PaytmCreateOrder = () => {
             return;
         }
         let orderId = Math.floor(Math.random() * Date.now());
-        const data = {amount, orderId, mid,mKey};
+        const data = {amount, orderId, mid, mKey};
         let res = await fetch("/api/paytm/paytmPreTransaction", {
             method: "POST", // or 'PUT'
             headers: {

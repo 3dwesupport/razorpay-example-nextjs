@@ -25,7 +25,7 @@ const PaymentFailed = (params: any) => {
                     <div className={styles.heading}>Payment Failed</div>
                     <div className={styles.horizontalLine}></div>
                     <div className={styles.responseData}>
-                        Your payment  has been Failed!
+                        Your payment has been Failed!
                     </div>
                     <div className={styles.buttonStyle}>
                         <button

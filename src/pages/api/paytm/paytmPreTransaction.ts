@@ -1,5 +1,3 @@
-import paytmConfig from "../config";
-
 const https = require('https');
 const PaytmChecksum = require('paytmchecksum');
 
@@ -9,7 +7,7 @@ const PaytmChecksum = require('paytmchecksum');
  * @param res
  */
 export default async function handler(req: any, res: any) {
-    console.log("req.body::::::::::::::",req)
+    console.log("req.body::::::::::::::", req)
     if (req.method === 'POST') {
         let paytmParams: any = {}
         paytmParams.body = {

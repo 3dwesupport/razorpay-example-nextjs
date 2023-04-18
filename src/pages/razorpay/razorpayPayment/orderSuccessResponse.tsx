@@ -1,6 +1,7 @@
 import styles from '@/styles/Home.module.css'
 import {useRouter} from "next/router";
 import React from "react";
+
 /***
  * render Response of the order on screen
  * @param params
@@ -8,7 +9,7 @@ import React from "react";
  */
 const OrderSuccessResponse = (params: any) => {
     const router = useRouter();
-    let data:any = router.query;
+    let data: any = router.query;
     data.journey = "CreateOrder"
 
     //render the screen of the razorpay payment
@@ -48,7 +49,7 @@ const OrderSuccessResponse = (params: any) => {
                                 </div>
                                 <div className={styles.values}>
                                     <div>{data?.razorpay_id}</div>
-                                    <div>{data?.amount/100}</div>
+                                    <div>{data?.amount / 100}</div>
                                     <div>{data?.currency}</div>
                                     <div>{data?.receipt}</div>
                                     <div>{data?.id}</div>

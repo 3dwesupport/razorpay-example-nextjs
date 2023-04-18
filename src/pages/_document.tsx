@@ -1,9 +1,8 @@
-import {Html, Head, Main, NextScript} from 'next/document'
+import {Head, Html, Main, NextScript} from 'next/document'
 import Script from "next/script";
 import paytmConfig from "./api/config";
 
 export default function Document() {
-    // @ts-ignore
     return (
         <Html lang="en">
             <Head/>
